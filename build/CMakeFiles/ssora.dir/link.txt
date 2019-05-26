@@ -1,0 +1,1 @@
+/opt/gnu/gcc/bin/g++    -rdynamic CMakeFiles/ssora.dir/src/SsoraInveser.cpp.o  -o ../bin/ssora 

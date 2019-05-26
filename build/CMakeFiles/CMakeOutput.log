@@ -1,0 +1,766 @@
+The system is: Linux - 2.6.32-754.2.1.el6.x86_64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/aguldemo/Code/pcg/build/CMakeFiles/3.9.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/gnu/gcc/bin/g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/aguldemo/Code/pcg/build/CMakeFiles/3.9.1/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_94111/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_94111.dir/build.make CMakeFiles/cmTC_94111.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_94111.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_94111.dir/testCCompiler.c.o   -c /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_94111
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_94111.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_94111.dir/testCCompiler.c.o  -o cmTC_94111 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_c8c46/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_c8c46.dir/build.make CMakeFiles/cmTC_c8c46.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o   -c /opt/cmake/share/cmake-3.9/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_c8c46
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c8c46.dir/link.txt --verbose=1
+/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o  -o cmTC_c8c46 
+Using built-in specs.
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
+Thread model: posix
+gcc version 4.4.7 20120313 (Red Hat 4.4.7-23) (GCC) 
+COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c8c46' '-mtune=generic'
+ /usr/libexec/gcc/x86_64-redhat-linux/4.4.7/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c8c46 /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../.. CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crtn.o
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_c8c46/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_c8c46.dir/build.make CMakeFiles/cmTC_c8c46.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o   -c /opt/cmake/share/cmake-3.9/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_c8c46]
+  ignore line: [/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c8c46.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o  -o cmTC_c8c46 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: x86_64-redhat-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.4.7 20120313 (Red Hat 4.4.7-23) (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c8c46' '-mtune=generic']
+  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/4.4.7/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c8c46 /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../.. CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crtn.o]
+    arg [/usr/libexec/gcc/x86_64-redhat-linux/4.4.7/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_c8c46] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.7] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.7] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../..]
+    arg [CMakeFiles/cmTC_c8c46.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.7]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.7]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../..] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/4.4.7;/usr/lib64;/lib64;/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4;/usr/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_3628e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_3628e.dir/build.make CMakeFiles/cmTC_3628e.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3628e.dir/feature_tests.c.o
+/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_3628e.dir/feature_tests.c.o   -c /home/aguldemo/Code/pcg/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_3628e
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3628e.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_3628e.dir/feature_tests.c.o  -o cmTC_3628e 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c89] compiler features compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_06e1b/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_06e1b.dir/build.make CMakeFiles/cmTC_06e1b.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_06e1b.dir/feature_tests.c.o
+/usr/bin/cc   -std=c89 -o CMakeFiles/cmTC_06e1b.dir/feature_tests.c.o   -c /home/aguldemo/Code/pcg/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_06e1b
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_06e1b.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_06e1b.dir/feature_tests.c.o  -o cmTC_06e1b 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_b41fc/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_b41fc.dir/build.make CMakeFiles/cmTC_b41fc.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b41fc.dir/testCXXCompiler.cxx.o
+/opt/gnu/gcc/bin/g++     -o CMakeFiles/cmTC_b41fc.dir/testCXXCompiler.cxx.o -c /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_b41fc
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b41fc.dir/link.txt --verbose=1
+/opt/gnu/gcc/bin/g++       -rdynamic CMakeFiles/cmTC_b41fc.dir/testCXXCompiler.cxx.o  -o cmTC_b41fc 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_ff430/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_ff430.dir/build.make CMakeFiles/cmTC_ff430.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o
+/opt/gnu/gcc/bin/g++     -o CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o -c /opt/cmake/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_ff430
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff430.dir/link.txt --verbose=1
+/opt/gnu/gcc/bin/g++      -v -rdynamic CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_ff430 
+Using built-in specs.
+COLLECT_GCC=/opt/gnu/gcc/bin/g++
+COLLECT_LTO_WRAPPER=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: ./configure --prefix=/opt/gnu/gcc --with-gmp=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/gmp --with-mpfr=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpfr --with-mpc=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpc --disable-multilib
+Thread model: posix
+gcc version 4.9.2 (GCC) 
+COMPILER_PATH=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ff430' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_ff430 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../.. CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_ff430/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_ff430.dir/build.make CMakeFiles/cmTC_ff430.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/gnu/gcc/bin/g++     -o CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o -c /opt/cmake/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_ff430]
+  ignore line: [/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ff430.dir/link.txt --verbose=1]
+  ignore line: [/opt/gnu/gcc/bin/g++      -v -rdynamic CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_ff430 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/gnu/gcc/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ./configure --prefix=/opt/gnu/gcc --with-gmp=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/gmp --with-mpfr=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpfr --with-mpc=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpc --disable-multilib]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.2 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ff430' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_ff430 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../.. CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_ff430] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o] ==> ignore
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2]
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..]
+    arg [CMakeFiles/cmTC_ff430.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2] ==> [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2]
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64] ==> [/opt/gnu/gcc/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..] ==> [/opt/gnu/gcc/lib]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2;/opt/gnu/gcc/lib64;/lib64;/usr/lib64;/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4;/opt/gnu/gcc/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_fc6fd/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_fc6fd.dir/build.make CMakeFiles/cmTC_fc6fd.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_fc6fd.dir/feature_tests.cxx.o
+/opt/gnu/gcc/bin/g++    -std=c++14 -o CMakeFiles/cmTC_fc6fd.dir/feature_tests.cxx.o -c /home/aguldemo/Code/pcg/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_fc6fd
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc6fd.dir/link.txt --verbose=1
+/opt/gnu/gcc/bin/g++       -rdynamic CMakeFiles/cmTC_fc6fd.dir/feature_tests.cxx.o  -o cmTC_fc6fd 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_5042f/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_5042f.dir/build.make CMakeFiles/cmTC_5042f.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5042f.dir/feature_tests.cxx.o
+/opt/gnu/gcc/bin/g++    -std=c++11 -o CMakeFiles/cmTC_5042f.dir/feature_tests.cxx.o -c /home/aguldemo/Code/pcg/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_5042f
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5042f.dir/link.txt --verbose=1
+/opt/gnu/gcc/bin/g++       -rdynamic CMakeFiles/cmTC_5042f.dir/feature_tests.cxx.o  -o cmTC_5042f 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_6120e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_6120e.dir/build.make CMakeFiles/cmTC_6120e.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_6120e.dir/feature_tests.cxx.o
+/opt/gnu/gcc/bin/g++    -std=c++98 -o CMakeFiles/cmTC_6120e.dir/feature_tests.cxx.o -c /home/aguldemo/Code/pcg/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_6120e
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6120e.dir/link.txt --verbose=1
+/opt/gnu/gcc/bin/g++       -rdynamic CMakeFiles/cmTC_6120e.dir/feature_tests.cxx.o  -o cmTC_6120e 
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates
+Compiling the CUDA compiler identification source file "CMakeCUDACompilerId.cu" succeeded.
+Compiler: /usr/local/cuda-9.2/bin/nvcc 
+Build flags: 
+Id flags:  -v;--keep;--keep-dir;tmp
+
+The output was:
+0
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-9.2/bin
+#$ _THERE_=/usr/local/cuda-9.2/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_DIR_=targets/x86_64-linux
+#$ TOP=/usr/local/cuda-9.2/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-9.2/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-9.2/bin/../lib:/opt/gnu/gcc/lib64:/opt/gnu/gmp/lib:/opt/gnu/mpfr/lib:/opt/gnu/mpc/lib:/opt/gnu/lib:/opt/gnu/lib64:/opt/mvapich2/intel/ib/lib:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4:/opt/sdsc/lib:/usr/local//cuda-9.2/lib64
+#$ PATH=/usr/local/cuda-9.2/bin/../nvvm/bin:/usr/local/cuda-9.2/bin:/opt/cmake/bin:/home/aguldemo/bin:/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/aguldemo/bin:/usr/local//cuda-9.2/bin
+#$ INCLUDES="-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+#$ rm tmp/a_dlink.reg.c
+#$ gcc -D__CUDA_ARCH__=300 -E -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp1.ii" 
+#$ cicc --gnu_version=40902 --allow_managed   -arch compute_30 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 --include_file_name "CMakeCUDACompilerId.fatbin.c" -tused -nvvmir-library "/usr/local/cuda-9.2/bin/../nvvm/libdevice/libdevice.10.bc" --gen_module_id_file --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" --orig_src_file_name "CMakeCUDACompilerId.cu" --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.c" --stub_file_name "tmp/CMakeCUDACompilerId.cudafe1.stub.c" --gen_device_file_name "tmp/CMakeCUDACompilerId.cudafe1.gpu"  "tmp/CMakeCUDACompilerId.cpp1.ii" -o "tmp/CMakeCUDACompilerId.ptx"
+#$ ptxas -arch=sm_30 -m64  "tmp/CMakeCUDACompilerId.ptx"  -o "tmp/CMakeCUDACompilerId.sm_30.cubin" 
+#$ fatbinary --create="tmp/CMakeCUDACompilerId.fatbin" -64 "--image=profile=sm_30,file=tmp/CMakeCUDACompilerId.sm_30.cubin" "--image=profile=compute_30,file=tmp/CMakeCUDACompilerId.ptx" --embedded-fatbin="tmp/CMakeCUDACompilerId.fatbin.c" --cuda
+#$ gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp4.ii" 
+#$ cudafe++ --gnu_version=40902 --allow_managed  --m64 --parse_templates --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.cpp" --stub_file_name "CMakeCUDACompilerId.cudafe1.stub.c" --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" "tmp/CMakeCUDACompilerId.cpp4.ii" 
+#$ gcc -D__CUDA_ARCH__=300 -c -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -m64 -o "tmp/CMakeCUDACompilerId.o" "tmp/CMakeCUDACompilerId.cudafe1.cpp" 
+#$ nvlink --arch=sm_30 --register-link-binaries="tmp/a_dlink.reg.c"  -m64   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -cpu-arch=X86_64 "tmp/CMakeCUDACompilerId.o"  -o "tmp/a_dlink.sm_30.cubin"
+#$ fatbinary --create="tmp/a_dlink.fatbin" -64 -link "--image=profile=sm_30,file=tmp/a_dlink.sm_30.cubin" --embedded-fatbin="tmp/a_dlink.fatbin.c" 
+#$ gcc -c -x c++ -DFATBINFILE="\"tmp/a_dlink.fatbin.c\"" -DREGISTERLINKBINARYFILE="\"tmp/a_dlink.reg.c\"" -I. -D__NV_EXTRA_INITIALIZATION= -D__NV_EXTRA_FINALIZATION=  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -m64 -o "tmp/a_dlink.o" "/usr/local/cuda-9.2/bin/crt/link.stub" 
+#$ g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group 
+
+
+Compilation of the CUDA compiler identification source "CMakeCUDACompilerId.cu" produced "a.out"
+
+The CUDA compiler identification is NVIDIA, found in "/home/aguldemo/Code/pcg/build/CMakeFiles/3.9.1/CompilerIdCUDA/a.out"
+
+Parsed CUDA nvcc implicit link information from above output:
+  found 'LIBRARIES=' string: ["-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib"]
+  considering line: [#$ rm tmp/a_dlink.reg.c]
+  considering line: [gcc -D__CUDA_ARCH__=300 -E -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp1.ii" ]
+  considering line: [cicc --gnu_version=40902 --allow_managed   -arch compute_30 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 --include_file_name "CMakeCUDACompilerId.fatbin.c" -tused -nvvmir-library "/usr/local/cuda-9.2/bin/../nvvm/libdevice/libdevice.10.bc" --gen_module_id_file --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" --orig_src_file_name "CMakeCUDACompilerId.cu" --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.c" --stub_file_name "tmp/CMakeCUDACompilerId.cudafe1.stub.c" --gen_device_file_name "tmp/CMakeCUDACompilerId.cudafe1.gpu"  "tmp/CMakeCUDACompilerId.cpp1.ii" -o "tmp/CMakeCUDACompilerId.ptx"]
+  considering line: [ptxas -arch=sm_30 -m64  "tmp/CMakeCUDACompilerId.ptx"  -o "tmp/CMakeCUDACompilerId.sm_30.cubin" ]
+  considering line: [fatbinary --create="tmp/CMakeCUDACompilerId.fatbin" -64 "--image=profile=sm_30,file=tmp/CMakeCUDACompilerId.sm_30.cubin" "--image=profile=compute_30,file=tmp/CMakeCUDACompilerId.ptx" --embedded-fatbin="tmp/CMakeCUDACompilerId.fatbin.c" --cuda]
+  considering line: [gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp4.ii" ]
+  considering line: [cudafe++ --gnu_version=40902 --allow_managed  --m64 --parse_templates --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.cpp" --stub_file_name "CMakeCUDACompilerId.cudafe1.stub.c" --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" "tmp/CMakeCUDACompilerId.cpp4.ii" ]
+  considering line: [gcc -D__CUDA_ARCH__=300 -c -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -m64 -o "tmp/CMakeCUDACompilerId.o" "tmp/CMakeCUDACompilerId.cudafe1.cpp" ]
+  considering line: [nvlink --arch=sm_30 --register-link-binaries="tmp/a_dlink.reg.c"  -m64   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -cpu-arch=X86_64 "tmp/CMakeCUDACompilerId.o"  -o "tmp/a_dlink.sm_30.cubin"]
+    ignoring nvlink line
+  considering line: [fatbinary --create="tmp/a_dlink.fatbin" -64 -link "--image=profile=sm_30,file=tmp/a_dlink.sm_30.cubin" --embedded-fatbin="tmp/a_dlink.fatbin.c" ]
+  considering line: [gcc -c -x c++ -DFATBINFILE="\"tmp/a_dlink.fatbin.c\"" -DREGISTERLINKBINARYFILE="\"tmp/a_dlink.reg.c\"" -I. -D__NV_EXTRA_INITIALIZATION= -D__NV_EXTRA_FINALIZATION=  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -m64 -o "tmp/a_dlink.o" "/usr/local/cuda-9.2/bin/crt/link.stub" ]
+  considering line: [g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+    extracted link line: [g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+  considering line: []
+
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line: [cuda-fake-ld g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+    arg [cuda-fake-ld] ==> ignore
+    arg [g++] ==> ignore
+    arg [-m64] ==> ignore
+    arg [-o] ==> ignore
+    arg [a.out] ==> ignore
+    arg [-Wl,--start-group] ==> ignore
+    arg [tmp/a_dlink.o] ==> ignore
+    arg [tmp/CMakeCUDACompilerId.o] ==> ignore
+    arg [-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs] ==> dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs]
+    arg [-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib] ==> dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib]
+    arg [-lcudadevrt] ==> lib [cudadevrt]
+    arg [-lcudart_static] ==> lib [cudart_static]
+    arg [-lrt] ==> lib [rt]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-ldl] ==> lib [dl]
+    arg [-Wl,--end-group] ==> ignore
+  collapse library dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs]
+  collapse library dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+  implicit libs: [cudadevrt;cudart_static;rt;pthread;dl]
+  implicit dirs: [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs;/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+  implicit fwks: []
+
+
+Parsed CUDA nvcc include information from above output:
+  found 'LIBRARIES=' string: ["-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib"]
+  considering line: [#$ rm tmp/a_dlink.reg.c]
+  considering line: [gcc -D__CUDA_ARCH__=300 -E -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp1.ii" ]
+  considering line: [cicc --gnu_version=40902 --allow_managed   -arch compute_30 -m64 -ftz=0 -prec_div=1 -prec_sqrt=1 -fmad=1 --include_file_name "CMakeCUDACompilerId.fatbin.c" -tused -nvvmir-library "/usr/local/cuda-9.2/bin/../nvvm/libdevice/libdevice.10.bc" --gen_module_id_file --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" --orig_src_file_name "CMakeCUDACompilerId.cu" --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.c" --stub_file_name "tmp/CMakeCUDACompilerId.cudafe1.stub.c" --gen_device_file_name "tmp/CMakeCUDACompilerId.cudafe1.gpu"  "tmp/CMakeCUDACompilerId.cpp1.ii" -o "tmp/CMakeCUDACompilerId.ptx"]
+  considering line: [ptxas -arch=sm_30 -m64  "tmp/CMakeCUDACompilerId.ptx"  -o "tmp/CMakeCUDACompilerId.sm_30.cubin" ]
+  considering line: [fatbinary --create="tmp/CMakeCUDACompilerId.fatbin" -64 "--image=profile=sm_30,file=tmp/CMakeCUDACompilerId.sm_30.cubin" "--image=profile=compute_30,file=tmp/CMakeCUDACompilerId.ptx" --embedded-fatbin="tmp/CMakeCUDACompilerId.fatbin.c" --cuda]
+  considering line: [gcc -E -x c++ -D__CUDACC__ -D__NVCC__  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -include "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" > "tmp/CMakeCUDACompilerId.cpp4.ii" ]
+  considering line: [cudafe++ --gnu_version=40902 --allow_managed  --m64 --parse_templates --gen_c_file_name "tmp/CMakeCUDACompilerId.cudafe1.cpp" --stub_file_name "CMakeCUDACompilerId.cudafe1.stub.c" --module_id_file_name "tmp/CMakeCUDACompilerId.module_id" "tmp/CMakeCUDACompilerId.cpp4.ii" ]
+  considering line: [gcc -D__CUDA_ARCH__=300 -c -x c++  -DCUDA_DOUBLE_MATH_FUNCTIONS "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -m64 -o "tmp/CMakeCUDACompilerId.o" "tmp/CMakeCUDACompilerId.cudafe1.cpp" ]
+  considering line: [nvlink --arch=sm_30 --register-link-binaries="tmp/a_dlink.reg.c"  -m64   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -cpu-arch=X86_64 "tmp/CMakeCUDACompilerId.o"  -o "tmp/a_dlink.sm_30.cubin"]
+    ignoring nvlink line
+  considering line: [fatbinary --create="tmp/a_dlink.fatbin" -64 -link "--image=profile=sm_30,file=tmp/a_dlink.sm_30.cubin" --embedded-fatbin="tmp/a_dlink.fatbin.c" ]
+  considering line: [gcc -c -x c++ -DFATBINFILE="\"tmp/a_dlink.fatbin.c\"" -DREGISTERLINKBINARYFILE="\"tmp/a_dlink.reg.c\"" -I. -D__NV_EXTRA_INITIALIZATION= -D__NV_EXTRA_FINALIZATION=  "-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"   -D"__CUDACC_VER_BUILD__=88" -D"__CUDACC_VER_MINOR__=2" -D"__CUDACC_VER_MAJOR__=9" -m64 -o "tmp/a_dlink.o" "/usr/local/cuda-9.2/bin/crt/link.stub" ]
+  considering line: [g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+    extracted link line: [g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+  considering line: []
+  found 'INCLUDES=' string: ["-I/usr/local/cuda-9.2/bin/../targets/x86_64-linux/include"  ]
+
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line: [cuda-fake-ld g++ -m64 -o "a.out" -Wl,--start-group "tmp/a_dlink.o" "tmp/CMakeCUDACompilerId.o"   "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib" -lcudadevrt  -lcudart_static  -lrt -lpthread  -ldl  -Wl,--end-group ]
+    arg [cuda-fake-ld] ==> ignore
+    arg [g++] ==> ignore
+    arg [-m64] ==> ignore
+    arg [-o] ==> ignore
+    arg [a.out] ==> ignore
+    arg [-Wl,--start-group] ==> ignore
+    arg [tmp/a_dlink.o] ==> ignore
+    arg [tmp/CMakeCUDACompilerId.o] ==> ignore
+    arg [-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs] ==> dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs]
+    arg [-L/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib] ==> dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib]
+    arg [-lcudadevrt] ==> lib [cudadevrt]
+    arg [-lcudart_static] ==> lib [cudart_static]
+    arg [-lrt] ==> lib [rt]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-ldl] ==> lib [dl]
+    arg [-Wl,--end-group] ==> ignore
+  collapse library dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib/stubs] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs]
+  collapse library dir [/usr/local/cuda-9.2/bin/../targets/x86_64-linux/lib] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+  implicit libs: [cudadevrt;cudart_static;rt;pthread;dl]
+  implicit dirs: [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs;/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+  implicit fwks: []
+
+
+Determining if the CUDA compiler works passed with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_834d2/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_834d2.dir/build.make CMakeFiles/cmTC_834d2.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CUDA object CMakeFiles/cmTC_834d2.dir/main.cu.o
+/usr/local/cuda-9.2/bin/nvcc     -x cu -c /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp/main.cu -o CMakeFiles/cmTC_834d2.dir/main.cu.o
+Linking CUDA device code CMakeFiles/cmTC_834d2.dir/cmake_device_link.o
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_834d2.dir/dlink.txt --verbose=1
+/usr/local/cuda-9.2/bin/nvcc    -Xcompiler=-fPIC -Wno-deprecated-gpu-targets -shared -dlink CMakeFiles/cmTC_834d2.dir/main.cu.o -o CMakeFiles/cmTC_834d2.dir/cmake_device_link.o 
+Linking CUDA executable cmTC_834d2
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_834d2.dir/link.txt --verbose=1
+g++    CMakeFiles/cmTC_834d2.dir/main.cu.o CMakeFiles/cmTC_834d2.dir/cmake_device_link.o -o cmTC_834d2  -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CUDA compiler ABI info compiled with the following output:
+Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_62d46/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_62d46.dir/build.make CMakeFiles/cmTC_62d46.dir/build
+gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+Building CUDA object CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o
+/usr/local/cuda-9.2/bin/nvcc     -x cu -c /opt/cmake/share/cmake-3.9/Modules/CMakeCUDACompilerABI.cu -o CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o
+Linking CUDA device code CMakeFiles/cmTC_62d46.dir/cmake_device_link.o
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d46.dir/dlink.txt --verbose=1
+/usr/local/cuda-9.2/bin/nvcc    -Xcompiler=-fPIC -Wno-deprecated-gpu-targets -shared -dlink CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o -o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o 
+Linking CUDA executable cmTC_62d46
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d46.dir/link.txt --verbose=1
+g++   -v CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o -o cmTC_62d46  -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl
+Using built-in specs.
+COLLECT_GCC=g++
+COLLECT_LTO_WRAPPER=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: ./configure --prefix=/opt/gnu/gcc --with-gmp=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/gmp --with-mpfr=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpfr --with-mpc=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpc --disable-multilib
+Thread model: posix
+gcc version 4.9.2 (GCC) 
+COMPILER_PATH=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_62d46' '-L/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs' '-L/usr/local/cuda-9.2/targets/x86_64-linux/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2 --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_62d46 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o -L/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs -L/usr/local/cuda-9.2/targets/x86_64-linux/lib -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../.. CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o -lcudadevrt -lcudart_static -lrt -lpthread -ldl -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: Leaving directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CUDA implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_62d46/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_62d46.dir/build.make CMakeFiles/cmTC_62d46.dir/build]
+  ignore line: [gmake[1]: Entering directory `/home/aguldemo/Code/pcg/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CUDA object CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o]
+  ignore line: [/usr/local/cuda-9.2/bin/nvcc     -x cu -c /opt/cmake/share/cmake-3.9/Modules/CMakeCUDACompilerABI.cu -o CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o]
+  ignore line: [Linking CUDA device code CMakeFiles/cmTC_62d46.dir/cmake_device_link.o]
+  ignore line: [/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d46.dir/dlink.txt --verbose=1]
+  ignore line: [/usr/local/cuda-9.2/bin/nvcc    -Xcompiler=-fPIC -Wno-deprecated-gpu-targets -shared -dlink CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o -o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o ]
+  ignore line: [Linking CUDA executable cmTC_62d46]
+  ignore line: [/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62d46.dir/link.txt --verbose=1]
+  ignore line: [g++   -v CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o -o cmTC_62d46  -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ./configure --prefix=/opt/gnu/gcc --with-gmp=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/gmp --with-mpfr=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpfr --with-mpc=/state/partition1/git/gnucompiler-roll/BUILD/sdsc-gcc-4.9.2/../..//cache/mpc --disable-multilib]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.2 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64/:/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4/:/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_62d46' '-L/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs' '-L/usr/local/cuda-9.2/targets/x86_64-linux/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2 --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_62d46 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o -L/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs -L/usr/local/cuda-9.2/targets/x86_64-linux/lib -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64 -L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4 -L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../.. CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o CMakeFiles/cmTC_62d46.dir/cmake_device_link.o -lcudadevrt -lcudart_static -lrt -lpthread -ldl -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gnu/gcc/libexec/gcc/x86_64-unknown-linux-gnu/4.9.2/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_62d46] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtbegin.o] ==> ignore
+    arg [-L/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs] ==> dir [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs]
+    arg [-L/usr/local/cuda-9.2/targets/x86_64-linux/lib] ==> dir [/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2]
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+    arg [-L/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+    arg [-L/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..] ==> dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..]
+    arg [CMakeFiles/cmTC_62d46.dir/CMakeCUDACompilerABI.cu.o] ==> ignore
+    arg [CMakeFiles/cmTC_62d46.dir/cmake_device_link.o] ==> ignore
+    arg [-lcudadevrt] ==> lib [cudadevrt]
+    arg [-lcudart_static] ==> lib [cudart_static]
+    arg [-lrt] ==> lib [rt]
+    arg [-lpthread] ==> lib [pthread]
+    arg [-ldl] ==> lib [dl]
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  collapse library dir [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs]
+  collapse library dir [/usr/local/cuda-9.2/targets/x86_64-linux/lib] ==> [/usr/local/cuda-9.2/targets/x86_64-linux/lib]
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2] ==> [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2]
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../lib64] ==> [/opt/gnu/gcc/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/../compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64] ==> [/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64]
+  collapse library dir [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4] ==> [/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4]
+  collapse library dir [/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../..] ==> [/opt/gnu/gcc/lib]
+  implicit libs: [cudadevrt;cudart_static;rt;pthread;dl;stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs;/usr/local/cuda-9.2/targets/x86_64-linux/lib;/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2;/opt/gnu/gcc/lib64;/lib64;/usr/lib64;/opt/intel/composer_xe_2013_sp1.2.144/compiler/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/ipp/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/mkl/lib/intel64;/opt/intel/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4;/opt/gnu/gcc/lib]
+  implicit fwks: []
+
+
