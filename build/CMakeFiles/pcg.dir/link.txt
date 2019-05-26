@@ -1,1 +1,0 @@
-/opt/gnu/gcc/bin/g++    -rdynamic CMakeFiles/pcg.dir/src/Main.cpp.o  -o ../bin/pcg 

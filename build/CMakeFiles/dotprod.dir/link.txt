@@ -1,1 +1,0 @@
-g++   CMakeFiles/dotprod.dir/src/Dotprod.cu.o CMakeFiles/dotprod.dir/cmake_device_link.o -o ../bin/dotprod  -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda-9.2/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl

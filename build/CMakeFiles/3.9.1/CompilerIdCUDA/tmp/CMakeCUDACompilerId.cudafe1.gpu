@@ -1,5 +1,0 @@
-typedef char __nv_bool;
-# 212 "/opt/gnu/gcc/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stddef.h" 3
-typedef unsigned long size_t;
-#include "crt/device_runtime.h"
-#include "common_functions.h"
