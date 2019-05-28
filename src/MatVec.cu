@@ -1,40 +1,14 @@
 #include <iostream>
+#include <iomanip>
 #include <cstdio>
+#include <cassert>
 #include "DenseVector.hpp"
 #include "SparseMatrix.hpp"
 #include "DevicePtr.cuh"
-
-template <class T>
-__global__ void sparseMatrixVectorProd(const T* matEntries,
-				       const int* matCols,
-				       const int* matRowPtrs,
-				       const T* vec,
-				       const int* dim,
-				       T* result) {
-    extern __shared__ int shared[];
-    T* cache = (T*) shared;
-
-    const int globalId = blockDim.x * blockIdx.x + threadIdx.x;
-    const int stride = blockDim.x * gridDim.x;
-    const int nnz = matRowPtrs[*dim];
-    
-    for (int i = globalId; i < nnz; i += stride) {
-	cache[i] = matEntries[i] * vec[matCols[i]];
-    }
-    __syncthreads();
-    
-    for (int i = 0; i < *dim; i++) {
-	if (globalId == matRowPtrs[i]) {
-	    result[i] = 0;
-	    for (int j = matRowPtrs[i]; j < matRowPtrs[i+1]; j++) {
-		atomicAdd(&result[i], cache[j]);
-	    }
-	}
-    }
-}
+#include "Parallel.cuh"
 
 int main () {
-    const int dim = 32;
+    const int dim = 2123;
     DenseVector<float> vec = DenseVector<float>::constant(dim, 1);
     SparseMatrix<float> mat = SparseMatrix<float>::triDiagonal(dim, 1, 2, 3);
     
@@ -47,22 +21,36 @@ int main () {
     DevicePtr<int> deviceDim(&dim);
     
     DevicePtr<float> deviceResult(dim);
-    
-    sparseMatrixVectorProd<<<2,mat.nonZeroEntries() ,mat.nonZeroEntries() *sizeof(float)>>>(deviceEntries.raw(),
-											    deviceCols.raw(),
-											    deviceRowPtrs.raw(),
-											    deviceVec.raw(),
-											    deviceDim.raw(),
-											    deviceResult.raw());
-    checkCuda(cudaPeekAtLastError());
 
+    int blockSize = (mat.nonZeroEntries()/1024) + 1;
+    sparseMatrixVectorProd<<<blockSize,
+	1024,
+	mat.nonZeroEntries() *sizeof(float)>>>(deviceEntries.raw(),
+					       deviceCols.raw(),
+					       deviceRowPtrs.raw(),
+					       deviceVec.raw(),
+					       deviceDim.raw(),
+					       deviceResult.raw());
+    checkCuda(cudaPeekAtLastError());
+    
     float result[dim];
     deviceResult.copyToHost(result);
+    std::cout << "NNZ: " << mat.nonZeroEntries() << "\n";
 
-    for(int i = 0; i < dim; i++) {
-	std::cout << result[i] << "\n";
+    if (result[0] != 5) {
+	std::cout << "result[0] is not 5: " << result[0] << "\n";
+	return 1;
     }
-
+    for(int i = 1; i < dim - 1; i++) {
+	if (result[i] != 6) {
+	    std::cout << "result[" << i << "] is not 6: " << result[i] << "\n";
+	    //return 1;
+	}
+    }
+    if (result[dim - 1] != 3) {
+	std::cout << "result[last] is not 3: " << result[dim - 1] << "\n";
+	return 1;
+    }
 
     return 0;
 }
