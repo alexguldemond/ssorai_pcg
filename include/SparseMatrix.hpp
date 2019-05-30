@@ -133,11 +133,11 @@ std::vector<T> SparseMatrix<T>::getAllDiagonals() const {
 template <class T>
 SparseMatrix<T> SparseMatrix<T>::ssoraInverse(double w) const {
     double mult = w*(2 - w);
-    std::vector<double> newEntries(nonZeroEntries());
+    std::vector<T> newEntries(nonZeroEntries());
     std::vector<int> newCols(cols);
     std::vector<int> newRowPtrs(rowPtrs);
     
-    std::vector<double> diagonals = getAllDiagonals();
+    std::vector<T> diagonals = getAllDiagonals();
     
     for (int i = 0; i < dim(); i++) {
 	for (int ptr = rowPtrs[i]; ptr < rowPtrs[i+1]; ptr++) {

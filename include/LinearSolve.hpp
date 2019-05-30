@@ -3,7 +3,7 @@
 
 #include "DenseVector.hpp"
 #include "SparseMatrix.hpp"
-
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 template<class U>
 struct Result {
@@ -53,17 +53,30 @@ Result<T> SsoraPcgSolver<T>::solve() const {
     T r_dot_z = residual.dot(z);
     DenseVector<T> direction = z;
     DenseVector<T> a_direction = mat * direction;
+    
     int count = 0;
-    while (residual.normSquared() > threshold && count < maxIter) {
+    T r_dot_r;
+    while ((r_dot_r = residual.normSquared()) > threshold && count < maxIter) {
+	
+	boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
+	std::string time = boost::posix_time::to_simple_string(timeLocal);
+	std::cout << time << " k = " << count << ", r.r = " << r_dot_r  << "\n";
+	
 	T stepsize = r_dot_z / (direction.dot(a_direction));
+
 	x.updateAx(stepsize, direction);
+
 	nextResidual = residual.plusAx( -stepsize, a_direction);
+
 	nextZ = preconditioner * nextResidual;
+	
 	T next_r_dot_z = nextZ.dot(nextResidual) ;
 	T update = next_r_dot_z / r_dot_z;
 	r_dot_z = next_r_dot_z;
 	direction = nextZ.plusAx(update, direction);
-	a_direction = mat * direction;  
+	
+	a_direction = mat * direction;
+	
 	residual = std::move(nextResidual);
 	z = std::move(nextZ);
 	count++;

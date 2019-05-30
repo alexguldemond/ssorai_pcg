@@ -1,6 +1,8 @@
 #ifndef DEVICE_PTR_CUH
 #define DEVICE_PTR_CUH
 
+#include <vector>
+#include <algorithm>
 #include "Error.cuh"
 
 template <class T>
@@ -30,11 +32,25 @@ public:
 
     DevicePtr(const DevicePtr<T>& other)=delete;
 
-    DevicePtr(DevicePtr<T>&& other)=delete;
+    DevicePtr(DevicePtr<T>&& other) {
+	//Deliberately done via swap to encourage reuse of memory
+	int temp = count;
+	count = other.count;
+	other.count = temp;
+	std::swap(other._devicePtr, _devicePtr);
+    }
     
     DevicePtr<T>& operator=(const DevicePtr<T>& other)=delete;
 
-    DevicePtr<T>& operator=(DevicePtr<T>&& other)=delete;
+    DevicePtr<T>& operator=(DevicePtr<T>&& other) {
+	if (this != &other) {
+	    int temp = count;
+	    count = other.count;
+	    other.count = temp;
+	    std::swap(other._devicePtr, _devicePtr);
+	}
+	return *this;
+    }
 
     T* operator->() {
 	return _devicePtr;
@@ -57,12 +73,26 @@ public:
 	return (*this);
     }
 
+    T get() const {
+	T t;
+	copyToHost(&t);
+	return t;
+    }
+
+    std::vector<T> getAll() const {
+	std::vector<T> t(count);
+	copyToHost(&t[0]);
+	return t;
+    }
+    
     int size() const {
 	return count;
     }
     
     ~DevicePtr() {
-	cudaFree(_devicePtr);
+	if (_devicePtr != nullptr) {
+	    cudaFree(_devicePtr);
+	}
     }
     
 };

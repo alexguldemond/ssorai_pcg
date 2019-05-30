@@ -9,7 +9,7 @@ typedef double Number;
 
 int main() {
 
-    int dim = 1000;
+    int dim = 32;
     SparseMatrix<Number> A = SparseMatrix<Number>::triDiagonal(dim, -1, 2,-1);
     std::vector<Number> bVec(dim , 1);
     DenseVector<Number> b(bVec);

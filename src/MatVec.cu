@@ -18,18 +18,17 @@ int main () {
 
     DevicePtr<float> deviceVec(vec.data(), dim);
 
-    DevicePtr<int> deviceDim(&dim);
     
     DevicePtr<float> deviceResult(dim);
 
     int blockSize = (mat.nonZeroEntries()/1024) + 1;
-    sparseMatrixVectorProd<<<blockSize,
+    kernel::sparseMatrixVectorProduct<<<blockSize,
 	1024,
 	mat.nonZeroEntries() *sizeof(float)>>>(deviceEntries.raw(),
 					       deviceCols.raw(),
 					       deviceRowPtrs.raw(),
 					       deviceVec.raw(),
-					       deviceDim.raw(),
+					       dim,
 					       deviceResult.raw());
     checkCuda(cudaPeekAtLastError());
     
