@@ -1,26 +1,29 @@
 #include "SparseMatrix.hpp"
 #include "DenseVector.hpp"
 #include "LinearSolve.hpp"
+
 #include <iostream>
-#include <vector>
-#include <utility>
+#include <cstdlib>
 
 typedef double Number;
 
-int main() {
+int main(int argc, char** argv) {
+    int dim = 1024;
+    if (argc > 1) {
+	dim = atoi(argv[1]);
+    }
+    double relax = 1;
+    if (argc > 2) {
+	relax = atof(argv[2]);
+    }
 
-    int dim = 32;
+    std::cout << "Solving with dim = " << dim << ", relax = " << relax << "\n";
     SparseMatrix<Number> A = SparseMatrix<Number>::triDiagonal(dim, -1, 2,-1);
     std::vector<Number> bVec(dim , 1);
     DenseVector<Number> b(bVec);
 
-    std::cout << "Solveing the following:\n";
-    std::cout << A.toString() << "\n";
-    std::cout << b.toString() << "\n";
-
-    SsoraPcgSolver<Number> solver(A, b, 0.01, 1, 100);
+    SsoraPcgSolver<Number> solver(A, b, .1, relax, dim);
     Result<Number> result = solver.solve();
     
-    std::cout << result.result.toString() << "\n";
     std::cout << "Iterations: " << result.iterations << "\n"; 
 }

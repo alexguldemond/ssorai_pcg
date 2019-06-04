@@ -1,10 +1,12 @@
 #ifndef PARALLEL_CUH
 #define PARALLEL_CUH
 
+#define THREADS_PER_VECTOR 32
+
 namespace kernel {
 
     template<class T>
-    __global__ void copyArray(const T* src, T* dest, int dim) {
+    __global__ void copyArray(const T* __restrict__ src, T* __restrict__ dest, int dim) {
 	const int globalId = blockDim.x * blockIdx.x + threadIdx.x;
 	const int stride = blockDim.x * gridDim.x;
 	for (int i = globalId; i < dim; i += stride) {
@@ -13,7 +15,7 @@ namespace kernel {
     }
     
     template<class T>
-    __global__ void aXPlusY(T scalar, const T* vector1, const T* vector2,  int dim , T* result) {
+    __global__ void aXPlusY(T scalar, const T* __restrict__ vector1, const T* __restrict__ vector2,  int dim , T* __restrict__ result) {
 	const int globalId = blockDim.x * blockIdx.x + threadIdx.x;
 	const int stride = blockDim.x * gridDim.x;
 	for (int i = globalId; i < dim; i += stride) {
@@ -22,7 +24,7 @@ namespace kernel {
     }
     
     template<class T>
-    __global__ void dotProduct(const T* vector1, const T* vector2, int dim,T* result) {
+    __global__ void dotProduct(const T* __restrict__ vector1, const T* __restrict__ vector2, int dim,T* __restrict__ result) {
 	extern __shared__ int shared[];
 	T* cache = (T*) shared;
 	
@@ -35,9 +37,6 @@ namespace kernel {
 	    temp += vector1[i] * vector2[i];
 	}
 	cache[cacheindex] = temp;
-	if (globalId == 0) {
-	    *result = 0;
-	}
 	
 	__syncthreads();
 	int i = blockDim.x / 2;
@@ -53,40 +52,26 @@ namespace kernel {
 	    atomicAdd(result, cache[0]);
 	}
     }
-    
+
     template <class T>
-    __global__ void sparseMatrixVectorProduct(const T* matEntries,
-					      const int* matCols,
-					      const int* matRowPtrs,
-					      const T* vec,
+    __global__ void sparseMatrixVectorProduct(const T* __restrict__  matEntries,
+					      const int* __restrict__ matCols,
+					      const int* __restrict__ matRowPtrs,
+					      const T* __restrict__ vec,
 					      int dim,
-					      T* result) {
-	extern __shared__ int shared[];
-	T* cache = (T*) shared; //Assume size is equal to nnz
-	
+					      T* __restrict__ result) {
+
 	const int globalId = blockDim.x * blockIdx.x + threadIdx.x;
 	const int stride = blockDim.x * gridDim.x;
-	const int nnz = matRowPtrs[dim];
-	
-	for (int i = globalId; i < nnz; i += stride) {
-	    cache[i] = matEntries[i] * vec[matCols[i]];
-	}
+
 	for (int i = globalId; i < dim; i += stride) {
-	    result[i] = 0;
-	}
-	
-	__syncthreads();
-	
-	__syncthreads();
-	for (int i = 0; i < dim; i++) {
-	    if (globalId == matRowPtrs[i] || ( threadIdx.x == 0 && globalId >= matRowPtrs[i] && globalId < matRowPtrs[i+1]) ) {
-		for (int j = globalId + 1; j < matRowPtrs[i + 1]; j++) {
-		    cache[globalId] += cache[j];
-		}
-	    atomicAdd(&result[i], cache[globalId]);
+	    T sum = 0;
+	    for (int j = matRowPtrs[i]; j < matRowPtrs[i+1]; j++) {
+		sum += matEntries[j] * vec[matCols[j]];
 	    }
+	    result[i] = sum;
 	}
-    }
-    
+    }	
 }
+
 #endif

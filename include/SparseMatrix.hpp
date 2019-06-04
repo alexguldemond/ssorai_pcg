@@ -109,7 +109,7 @@ T SparseMatrix<T>::operator()(int row, int col) const {
 
 template <class T>
 T SparseMatrix<T>::getDiagonal(int i) const {
-    T d;
+    T d = 0;
     for (int j = rowPtrs[i]; j < rowPtrs[i+1]; j++) {
 	if (cols[j] == i) {
 	    d = entries[j];
@@ -119,7 +119,6 @@ T SparseMatrix<T>::getDiagonal(int i) const {
     return d;
 }
 
-//TODO lazily
 template <class T>
 std::vector<T> SparseMatrix<T>::getAllDiagonals() const {
     std::vector<T> diagonals(dim());

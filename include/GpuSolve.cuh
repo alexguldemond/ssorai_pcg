@@ -12,7 +12,7 @@
 #include <algorithm>
 
 
-#define max(a, b) a >= b ? a : b
+#define max(a, b) ((a >= b) ? (a) : (b) )
 
 template <class T>
 struct DeviceMatrix {
@@ -77,26 +77,25 @@ public:
 
 template <class T>
 void GpuSolver<T>::matVec(const DeviceMatrix<T>& a, const DevicePtr<T>& x,  DevicePtr<T>& result) const {
-    int nonZero = nnz();
-    int gridSize = (nonZero/threadsPerBlock) + (nonZero % threadsPerBlock != 0);
-    int sharedSize = nonZero * sizeof(T);
-    kernel::sparseMatrixVectorProduct<<<gridSize,threadsPerBlock, sharedSize>>>(a.entries.raw(), a.cols.raw(), a.rowPtrs.raw(),
-										x.raw(), dim(), result.raw());
+    kernel::sparseMatrixVectorProduct<<<max(dim()/threadsPerBlock,1),threadsPerBlock>>>(a.entries.raw(), a.cols.raw(), a.rowPtrs.raw(),
+											x.raw(), dim(), result.raw());
     checkCuda(cudaPeekAtLastError());
 }
 
 template <class T>
 void GpuSolver<T>::aXPlusY(T scalar, const DevicePtr<T>& x,
 			   const DevicePtr<T>& y, DevicePtr<T>& result) const {
-
+    
     kernel::aXPlusY<<< max(dim()/threadsPerBlock,1), threadsPerBlock>>>(scalar, x.raw(), y.raw(), dim(), result.raw());
     checkCuda(cudaPeekAtLastError());
 }
 
 template <class T>
 void GpuSolver<T>::dotProduct(const DevicePtr<T>& vec1, const DevicePtr<T>& vec2, DevicePtr<T>& result) const {
+    checkCuda(cudaMemset(result.raw(), 0, sizeof(T)));
     int blocks = max(dim()/threadsPerBlock, 1);
     kernel::dotProduct<<<blocks, threadsPerBlock, threadsPerBlock*sizeof(T) >>>(vec1.raw(), vec2.raw(), dim(), result.raw());
+    checkCuda(cudaPeekAtLastError());
 }
 
 template <class T>

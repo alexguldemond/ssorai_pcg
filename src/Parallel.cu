@@ -2,21 +2,31 @@
 #include "DenseVector.hpp"
 #include "GpuSolve.cuh"
 
+#include <iostream>
+#include <cstdlib>
 
-int main() {
+int main(int argc, char** argv) {
+    int dim = 1024;
+    if (argc > 1) {
+	dim = atoi(argv[1]);
+    }
+    double relax = 1;
+    if (argc > 2) {
+	relax = atof(argv[2]);
+    }
+    int threadsPerBlock = 1024;
+    if (argc > 3) {
+	threadsPerBlock = atoi(argv[3]);
+    }
 
-    int dim = 32;
+    std::cout << "Solving with dim = " << dim << ", relax = " << relax << "\n";
     SparseMatrix<float> A = SparseMatrix<float>::triDiagonal(dim, -1, 2,-1);
     std::vector<float> bVec(dim , 1);
     DenseVector<float> b(bVec);
-
-    std::cout << "Solveing the following:\n";
-    std::cout << A.toString() << "\n";
-    std::cout << b.toString() << "\n";
     
-    GpuSolver<float> solver(A, b, 0.01, 1, 1024, 1024);
+    GpuSolver<float> solver(A, b, .1, relax, dim, threadsPerBlock);
     Result<float> result = solver.solve();
 
-    std::cout << result.result.toString() << "\n";
+    //std::cout << result.result.toString() << "\n";
     std::cout << "Iterations: " << result.iterations << "\n"; 
 }

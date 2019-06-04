@@ -57,7 +57,6 @@ Result<T> SsoraPcgSolver<T>::solve() const {
     int count = 0;
     T r_dot_r;
     while ((r_dot_r = residual.normSquared()) > threshold && count < maxIter) {
-	
 	boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
 	std::string time = boost::posix_time::to_simple_string(timeLocal);
 	std::cout << time << " k = " << count << ", r.r = " << r_dot_r  << "\n";
