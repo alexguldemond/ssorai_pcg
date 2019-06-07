@@ -5,49 +5,39 @@
 #include "SparseMatrix.hpp"
 #include "LinearSolve.hpp"
 #include "Parallel.cuh"
-#include "DevicePtr.cuh"
+#include "gpu_memory.cuh"
 
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include <iostream>
 #include <algorithm>
 
 
-#define max(a, b) ((a >= b) ? (a) : (b) )
+#define div_up(a, b) ((a/b) + ((a % b) == 0))
 
 template <class T>
-struct DeviceMatrix {
-    DevicePtr<T> entries;
-    DevicePtr<int> cols;
-    DevicePtr<int> rowPtrs;
+using DeviceVector = DenseVector<T, gpu::CudaDeleter<T[]> >;
 
-    DeviceMatrix(const SparseMatrix<T>& mat):
-	entries(&mat.entries[0], mat.nonZeroEntries()),
-	cols(&mat.cols[0], mat.nonZeroEntries()),
-	rowPtrs(&mat.rowPtrs[0], mat.dim() + 1) { }
-
-    DeviceMatrix(const DeviceMatrix<T>& other) = delete;
-    DeviceMatrix(DeviceMatrix<T>&& other) = delete;
-    DeviceMatrix<T>& operator=(const DeviceMatrix<T>& other) = delete;
-    DeviceMatrix<T>& operator=(DeviceMatrix<T>&& other) = delete;
-};
-
-template <class T>
-class GpuSolver: LinearSolver<T> {
+template <class T, class Deleter = std::default_delete<T[]>, class IntDeleter = std::default_delete<int[]> >
+class GpuSolver: LinearSolver<T, Deleter> {
 private:
-    SparseMatrix<T>& mat;
-    DenseVector<T>& vec;
+    SparseMatrix<T, Deleter, IntDeleter>& mat;
+    DenseVector<T, Deleter>& vec;
     double threshold;
     double relaxation;
     int maxIter;
     int threadsPerBlock;
 
-    void matVec(const DeviceMatrix<T>& a, const DevicePtr<T>& x, DevicePtr<T>& result) const;
+    void matVec(const gpu::device_ptr<T[]>& a_entries,
+		const gpu::device_ptr<int[]>& a_cols,
+		const gpu::device_ptr<int[]>& a_rowPtrs,
+		const DeviceVector<T>& x,
+		DeviceVector<T>& result) const;
 
-    void aXPlusY(T scalar, const DevicePtr<T>& x, const DevicePtr<T>& y, DevicePtr<T>& result) const;
+    void aXPlusY(T scalar, const DeviceVector<T>& x, const DeviceVector<T>& y, DeviceVector<T>& result) const;
     
-    void dotProduct(const DevicePtr<T>& vec1, const DevicePtr<T>& vec2, DevicePtr<T>& result) const;
+    void dotProduct(const DeviceVector<T>& vec1, const DeviceVector<T>& vec2, gpu::device_ptr<T>& result) const;
 
-    void copyVector(const DevicePtr<T>& src, DevicePtr<T>& dest) const;
+    void copyVector(const DeviceVector<T>& src, DeviceVector<T>& dest) const;
     
     int dim() const {
 	return mat.dim();
@@ -58,8 +48,8 @@ private:
     }
 			     
 public:
-    GpuSolver(SparseMatrix<T>& matrix,
-	      DenseVector<T>& vector,
+    GpuSolver(SparseMatrix<T, Deleter, IntDeleter>& matrix,
+	      DenseVector<T, Deleter>& vector,
 	      double thresh,
 	      double relax,
 	      int iters,
@@ -75,93 +65,115 @@ public:
     
 };
 
-template <class T>
-void GpuSolver<T>::matVec(const DeviceMatrix<T>& a, const DevicePtr<T>& x,  DevicePtr<T>& result) const {
-    kernel::sparseMatrixVectorProduct<<<max(dim()/threadsPerBlock,1),threadsPerBlock>>>(a.entries.raw(), a.cols.raw(), a.rowPtrs.raw(),
-											x.raw(), dim(), result.raw());
+template <class T, class Deleter, class IntDeleter>
+void GpuSolver<T, Deleter, IntDeleter>::matVec(const gpu::device_ptr<T[]>& a_entries,
+					       const gpu::device_ptr<int[]>& a_cols,
+					       const gpu::device_ptr<int[]>& a_rowPtrs,
+					       const DeviceVector<T>& x,
+					       DeviceVector<T>& result) const {
+    kernel::sparseMatrixVectorProduct<<<div_up(dim(),threadsPerBlock),threadsPerBlock>>>(a_entries.get(), a_cols.get(), a_rowPtrs.get(),
+											x.entries.get(), dim(), result.entries.get());
     checkCuda(cudaPeekAtLastError());
 }
 
-template <class T>
-void GpuSolver<T>::aXPlusY(T scalar, const DevicePtr<T>& x,
-			   const DevicePtr<T>& y, DevicePtr<T>& result) const {
+template <class T, class Deleter, class IntDeleter>
+void GpuSolver<T, Deleter, IntDeleter>::aXPlusY(T scalar,
+						const DeviceVector<T>& x,
+						const DeviceVector<T>& y,
+						DeviceVector<T>& result) const {
     
-    kernel::aXPlusY<<< max(dim()/threadsPerBlock,1), threadsPerBlock>>>(scalar, x.raw(), y.raw(), dim(), result.raw());
+    kernel::aXPlusY<<< div_up(dim(),threadsPerBlock), threadsPerBlock>>>(scalar,
+									 x.entries.get(),
+									 y.entries.get(),
+									 dim(),
+									 result.entries.get());
     checkCuda(cudaPeekAtLastError());
 }
 
-template <class T>
-void GpuSolver<T>::dotProduct(const DevicePtr<T>& vec1, const DevicePtr<T>& vec2, DevicePtr<T>& result) const {
-    checkCuda(cudaMemset(result.raw(), 0, sizeof(T)));
-    int blocks = max(dim()/threadsPerBlock, 1);
-    kernel::dotProduct<<<blocks, threadsPerBlock, threadsPerBlock*sizeof(T) >>>(vec1.raw(), vec2.raw(), dim(), result.raw());
+template <class T, class Deleter, class IntDeleter>
+void GpuSolver<T, Deleter, IntDeleter>::dotProduct(const DeviceVector<T>& vec1,
+						   const DeviceVector<T>& vec2,
+						   gpu::device_ptr<T>& result) const {
+    checkCuda(cudaMemset(result.get(), 0, sizeof(T)));
+    int blocks = div_up(dim(),threadsPerBlock);
+    kernel::dotProduct<<<blocks, threadsPerBlock, threadsPerBlock*sizeof(T)>>>(vec1.entries.get(), vec2.entries.get(), dim(), result.get());
     checkCuda(cudaPeekAtLastError());
 }
 
-template <class T>
-void GpuSolver<T>::copyVector(const DevicePtr<T>& src, DevicePtr<T>& dest) const {
-    kernel::copyArray<<< max(dim()/threadsPerBlock, 1), threadsPerBlock>>>(src.raw(), dest.raw(), dim());
+template <class T, class Deleter, class IntDeleter>
+void GpuSolver<T, Deleter, IntDeleter>::copyVector(const DeviceVector<T>& src, DeviceVector<T>& dest) const {
+    kernel::copyArray<<< div_up(dim(),threadsPerBlock), threadsPerBlock>>>(src.entries.get(), dest.entries.get(), dim());
     checkCuda(cudaPeekAtLastError());
 }
 
-template <class T>
-Result<T> GpuSolver<T>::solve() const {
-    DenseVector<T> x = DenseVector<T>::zero(dim());
-    SparseMatrix<T> p = mat.ssoraInverse(relaxation);
+template <class T, class Deleter, class IntDeleter>
+Result<T> GpuSolver<T, Deleter, IntDeleter>::solve() const {
+    std::cout << "Solving...\n";
+    DenseVector<T> x = DenseVectorFactory::zero<T>(dim());
 
-    //Setup all device data 
-    DevicePtr<T> device_x(x.data(), dim());
+    std::cout << "Computing ssora inverse...\n";
+    boost::posix_time::ptime time_start(boost::posix_time::microsec_clock::local_time());
+    auto p_entries = mat.ssoraInverseEntries(relaxation);
+    boost::posix_time::ptime time_end(boost::posix_time::microsec_clock::local_time());
+    boost::posix_time::time_duration ssoraDuration(time_end - time_start);
 
-    DeviceMatrix<T> device_p(p);
-    DeviceMatrix<T> device_a(mat);
+    time_start = boost::posix_time::microsec_clock::local_time();
+    //Setup all device data
+    std::cout << "Setting up device data...\n";
 
-    DevicePtr<T> device_b(vec.data(), dim());
+    DeviceVector<T> device_x(dim(), gpu::make_device<T>(x.entries, dim()));
+    
+    auto device_a_entries = gpu::make_device<T, Deleter>(mat.entries, nnz());
+    auto device_a_cols = gpu::make_device<int, IntDeleter>(mat.cols, nnz());
+    auto device_a_rowPtrs = gpu::make_device<int, IntDeleter>(mat.rowPtrs, dim() + 1);
 
+    auto device_p_entries = gpu::make_device<T, Deleter>(p_entries, nnz());
+    
     //r = b - a.x = b
-    DevicePtr<T> device_r(dim());
-    copyVector(device_b, device_r);
-    DevicePtr<T> device_next_r(dim());
+    DeviceVector<T> device_r(dim(), gpu::make_device<T, Deleter>(vec.entries, dim()));
+    DeviceVector<T> device_next_r(dim(), gpu::make_device<T>( dim() ));
 
     //z = p.r
-    DevicePtr<T> device_z(dim());
-    matVec(device_p, device_r, device_z);
-    DevicePtr<T> device_next_z(dim());
+    DeviceVector<T> device_z(dim(), gpu::make_device<T>( dim() ));
+    matVec(device_p_entries, device_a_cols, device_a_rowPtrs ,device_r, device_z);
+    DeviceVector<T> device_next_z(dim(), gpu::make_device<T>( dim() ));
 
     //cache r.z
-    DevicePtr<T> device_r_dot_z;
+    gpu::device_ptr<T> device_r_dot_z = gpu::make_device<T>();
     dotProduct(device_r, device_z, device_r_dot_z);
-    T r_dot_z = device_r_dot_z.get();
+    T r_dot_z = gpu::get_from_device<T>(device_r_dot_z);
 
     //d = z
-    DevicePtr<T> device_d(dim());
+    DeviceVector<T> device_d(dim(), gpu::make_device<T>( dim() ));
     copyVector(device_z, device_d);
 
     //a_d = a.d
-    DevicePtr<T> device_a_d(dim());
-    matVec(device_a, device_d, device_a_d);
+    DeviceVector<T> device_a_d(dim(), gpu::make_device<T>( dim() ));
+    matVec(device_a_entries, device_a_cols, device_a_rowPtrs, device_d, device_a_d);
 
     //cache r.r
-    DevicePtr<T> device_r_dot_r;
+    gpu::device_ptr<T> device_r_dot_r = gpu::make_device<T>();
     dotProduct(device_r, device_r, device_r_dot_r);
 
     //cache d.a.d
-    DevicePtr<T> device_d_a_d;
+    gpu::device_ptr<T> device_d_a_d = gpu::make_device<T>();
     dotProduct(device_d, device_a_d, device_d_a_d);
-    
-    DevicePtr<T> device_next_r_dot_z;
-    
+
+    gpu::device_ptr<T> device_next_r_dot_z = gpu::make_device<T>();
     int count = 0;
 
     //Begin algorithm
     T r_dot_r;
-    while (( r_dot_r = device_r_dot_r.get()) > threshold && count < maxIter) {
+    while (( r_dot_r = gpu::get_from_device<T>(device_r_dot_r)) > threshold && count < maxIter) {
 
-	boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
-	std::string time = boost::posix_time::to_simple_string(timeLocal);
-	std::cout << time << " k = " << count << ", r.r = " << r_dot_r << "\n";
-
+	if (count % 100 == 0) {
+	    boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
+	    std::string time = boost::posix_time::to_simple_string(timeLocal);
+	    std::cout << time << " k = " << count << ", r.r = " << r_dot_r << "\n";
+	}
+	
 	//Compute alpha = r.z/d.a.d
-	T stepSize = r_dot_z / device_d_a_d.get();
+	T stepSize = r_dot_z / gpu::get_from_device<T>(device_d_a_d);
 
 	//x = x + alpha*d
 	aXPlusY(stepSize, device_d, device_x, device_x);
@@ -170,11 +182,11 @@ Result<T> GpuSolver<T>::solve() const {
 	aXPlusY(-stepSize, device_a_d, device_r, device_next_r);
 	
 	//z = p.r
-	matVec(device_p, device_next_r, device_next_z);
+	matVec(device_p_entries, device_a_cols, device_a_rowPtrs, device_next_r, device_next_z);
 	
 	//next_r.z = r.z
 	dotProduct(device_next_r, device_next_z, device_next_r_dot_z);
-	T next_r_dot_z = device_next_r_dot_z.get();
+	T next_r_dot_z = gpu::get_from_device<T>(device_next_r_dot_z);
 
 	//beta = rk+1 . zk+1 / rk . zk
 	T update = next_r_dot_z / r_dot_z;
@@ -184,8 +196,7 @@ Result<T> GpuSolver<T>::solve() const {
 	aXPlusY(update, device_d, device_next_z, device_d);
 	
 	//a_d = a.d
-	DenseVector<T> host_d(device_d.getAll());
-	matVec(device_a, device_d, device_a_d);
+	matVec(device_a_entries, device_a_cols, device_a_rowPtrs, device_d, device_a_d);
 	
 	//Update
 	device_r = std::move(device_next_r);
@@ -194,9 +205,11 @@ Result<T> GpuSolver<T>::solve() const {
 	dotProduct(device_r, device_r,device_r_dot_r);
 	count++;
     }
-
-    DenseVector<T> result(device_x.getAll());
-    return Result<T>(result, count);
+    
+    DenseVector<T> result(dim(), gpu::get_from_device<T>(device_x.entries, dim()));
+    time_end = boost::posix_time::microsec_clock::local_time();
+    boost::posix_time::time_duration pcgDuration(time_end - time_start);
+    return Result<T>(result, count, r_dot_r, ssoraDuration , pcgDuration);
     
     
 }

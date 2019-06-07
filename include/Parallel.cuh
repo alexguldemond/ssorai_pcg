@@ -3,6 +3,8 @@
 
 #define THREADS_PER_VECTOR 32
 
+#include <cstdio>
+
 namespace kernel {
 
     template<class T>
@@ -71,7 +73,7 @@ namespace kernel {
 	    }
 	    result[i] = sum;
 	}
-    }	
+    }
 }
 
 #endif

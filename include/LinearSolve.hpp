@@ -9,16 +9,25 @@ template<class U>
 struct Result {
     DenseVector<U> result;
     int iterations;
-    Result(const DenseVector<U>& x, int iter) : result(x), iterations(iter) { }
+    U residualNormSquared;
+    boost::posix_time::time_duration ssoraDuration;
+    boost::posix_time::time_duration pcgDuration;
+    Result(const DenseVector<U>& x, int iter, U r_dot_r,
+	   const boost::posix_time::time_duration& ssora,
+	   const boost::posix_time::time_duration& pcg) : result(x),
+							  iterations(iter),
+							  residualNormSquared(r_dot_r),
+							  ssoraDuration(ssora),
+							  pcgDuration(pcg) { }
 };
 
-template <class T>
+template <class T,class Deleter = std::default_delete<T[]> >
 class LinearSolver {
 public:
     virtual Result<T> solve() const =0;
 };
 
-template <class T>
+template <class T >
 class SsoraPcgSolver: LinearSolver<T> {
 private:
     const SparseMatrix<T>& mat;
@@ -43,13 +52,20 @@ public:
 
 template <class T>
 Result<T> SsoraPcgSolver<T>::solve() const {
+    std::cout << "Solving...\n";
     int dim = mat.dim();
-    DenseVector<T> x = DenseVector<T>::zero(dim);
+    DenseVector<T> x = DenseVectorFactory::zero<T>(dim);
+    std::cout << "Computing ssora inverse...\n";
+    boost::posix_time::ptime time_start(boost::posix_time::microsec_clock::local_time());
     SparseMatrix<T> preconditioner = mat.ssoraInverse(relaxation);
+    boost::posix_time::ptime time_end(boost::posix_time::microsec_clock::local_time());
+    boost::posix_time::time_duration ssoraDuration(time_end - time_start);
+
+    time_start = boost::posix_time::microsec_clock::local_time();
     DenseVector<T> residual = vec.plusAx(-1, mat * x);
-    DenseVector<T> nextResidual = DenseVector<T>::zero(dim);
+    DenseVector<T> nextResidual = DenseVectorFactory::zero<T>(dim);
     DenseVector<T> z = preconditioner * residual;
-    DenseVector<T> nextZ = DenseVector<T>::zero(dim);
+    DenseVector<T> nextZ = DenseVectorFactory::zero<T>(dim);
     T r_dot_z = residual.dot(z);
     DenseVector<T> direction = z;
     DenseVector<T> a_direction = mat * direction;
@@ -57,30 +73,35 @@ Result<T> SsoraPcgSolver<T>::solve() const {
     int count = 0;
     T r_dot_r;
     while ((r_dot_r = residual.normSquared()) > threshold && count < maxIter) {
-	boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
-	std::string time = boost::posix_time::to_simple_string(timeLocal);
-	std::cout << time << " k = " << count << ", r.r = " << r_dot_r  << "\n";
-	
+	if (count % 100 == 0) {
+	    boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
+	    std::string time = boost::posix_time::to_simple_string(timeLocal);
+	    std::cout << time << " k = " << count << ", r.r = " << r_dot_r  << "\n";
+	}
 	T stepsize = r_dot_z / (direction.dot(a_direction));
-
+	
 	x.updateAx(stepsize, direction);
-
+	
 	nextResidual = residual.plusAx( -stepsize, a_direction);
 
 	nextZ = preconditioner * nextResidual;
 	
 	T next_r_dot_z = nextZ.dot(nextResidual) ;
 	T update = next_r_dot_z / r_dot_z;
+	
 	r_dot_z = next_r_dot_z;
 	direction = nextZ.plusAx(update, direction);
 	
 	a_direction = mat * direction;
-	
+
 	residual = std::move(nextResidual);
+
 	z = std::move(nextZ);
 	count++;
     }
-    return Result<T>(x, count);
+    time_end = boost::posix_time::microsec_clock::local_time();
+    boost::posix_time::time_duration pcgDuration(time_end - time_start);
+    return Result<T>(x, count, r_dot_r, ssoraDuration , pcgDuration);
 }
 
 #endif

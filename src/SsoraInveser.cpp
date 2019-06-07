@@ -7,12 +7,24 @@ typedef double Number;
 
 int main() {
     
-    std::vector<double> entries{6, -1, -1, 7, -2, -2, 8, -3, -3, 9, -4, -4, 10};
-    std::vector<int> cols      {0,  1,  0, 1,  2,  1, 2,  3,  2, 3,  4,  3,  4};
-    std::vector<int> rowPtrs{0, 2, 5, 8, 11, 13};
+    std::vector<Number> band(100, -1);
+    band[0] = 40;
+    SparseMatrix<Number> A = SparseMatrixFactory::bandMatrix<Number>(512, band);
+    std::cout << A.ssoraInverse(1.0).toString() << "\n";
     
-    SparseMatrix<Number> mat(entries, cols, rowPtrs);
+    SparseMatrix<Number> mat = SparseMatrixFactory::triDiagonal<Number>(1, -1, 2, -1);
+    std::cout << mat.toString() << "\n";
+    std::cout << mat.ssoraInverse(1.0).toString() << "\n";
+
+    mat = SparseMatrixFactory::triDiagonal<Number>(2, -1, 2, -1);
+    std::cout << mat.toString() << "\n";
+    std::cout << mat.ssoraInverse(1.0).toString() << "\n";
     
+    mat = SparseMatrixFactory::triDiagonal<Number>(3, -1, 2, -1);
+    std::cout << mat.toString() << "\n";
+    std::cout << mat.ssoraInverse(1.0).toString() << "\n";
+
+    mat = std::move(SparseMatrixFactory::triDiagonal<Number>(6, -1, 2, -1));
     std::cout << mat.toString() << "\n";
     std::cout << mat.ssoraInverse(1.0).toString() << "\n";
     return 0;

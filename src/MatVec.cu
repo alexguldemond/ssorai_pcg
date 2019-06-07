@@ -4,37 +4,37 @@
 #include <cassert>
 #include "DenseVector.hpp"
 #include "SparseMatrix.hpp"
-#include "DevicePtr.cuh"
 #include "Parallel.cuh"
+#include "gpu_memory.cuh"
 
 int main () {
     const int dim = 1024;
-    DenseVector<float> vec = DenseVector<float>::constant(dim, 1);
-    SparseMatrix<float> mat = SparseMatrix<float>::triDiagonal(dim, 1, 2, 3);
+    DenseVector<float> vec = DenseVectorFactory::constant<float>(dim, 1);
+    SparseMatrix<float> mat = SparseMatrixFactory::triDiagonal<float>(dim, 1, 2, 3);
+    const int nnz = mat.nonZeroEntries();
     
-    DevicePtr<float> deviceEntries(&mat.entries[0], mat.nonZeroEntries());
-    DevicePtr<int> deviceCols(&mat.cols[0], mat.nonZeroEntries());
-    DevicePtr<int> deviceRowPtrs(&mat.rowPtrs[0], dim + 1);
+    gpu::device_ptr<float[]> deviceEntries(gpu::make_device<float>(mat.entries, nnz));
+    gpu::device_ptr<int[]> deviceCols(gpu::make_device<int>(mat.cols, nnz));
+    gpu::device_ptr<int[]> deviceRowPtrs(gpu::make_device<int>(mat.rowPtrs, dim + 1));
 
-    DevicePtr<float> deviceVec(vec.data(), dim);
-
+    gpu::device_ptr<float[]> deviceVec(gpu::make_device<float>(vec.entries, dim));
     
-    DevicePtr<float> deviceResult(dim);
+    gpu::device_ptr<float[]> deviceResult(gpu::make_device<float>(dim)); 
 
     std::cout << "dim = " << dim << "\n";
     std::cout << "NNZ = " << mat.nonZeroEntries() << "\n";
     
 
-    kernel::sparseMatrixVectorProductWarp<float, 32><<<dim / 1024,1024>>>(deviceEntries.raw(),
-									  deviceCols.raw(),
-									  deviceRowPtrs.raw(),
-									  deviceVec.raw(),
-									  dim,
-									  deviceResult.raw());
+    kernel::sparseMatrixVectorProduct<<<dim / 1024,1024>>>(deviceEntries.get(),
+							   deviceCols.get(),
+							   deviceRowPtrs.get(),
+							   deviceVec.get(),
+							   dim,
+							   deviceResult.get());
     checkCuda(cudaPeekAtLastError());
     
     float result[dim];
-    deviceResult.copyToHost(result);
+    gpu::memcpy_to_host(result, deviceResult.get(), dim);
     
     std::cout << "Done, now checking\n";
     if (result[0] != 5) {
