@@ -8,33 +8,15 @@
 #include "gpu_memory.cuh"
 
 int main () {
-    const int dim = 1024;
-    DenseVector<float> vec = DenseVectorFactory::constant<float>(dim, 1);
-    SparseMatrix<float> mat = SparseMatrixFactory::triDiagonal<float>(dim, 1, 2, 3);
-    const int nnz = mat.nonZeroEntries();
+    const int dim = 1024*32;
+    DenseVector<float, gpu::CudaDeleter<float[]>> vec = DenseVector<float, gpu::CudaDeleter<float[]>>::constant(dim, 1.f);
+    SparseMatrix<float, gpu::CudaDeleter<float[]>, gpu::CudaDeleter<int[]>> mat =
+	SparseMatrix<float, gpu::CudaDeleter<float[]>, gpu::CudaDeleter<int[]>>::triDiagonal(dim, 1, 2, 3);
     
-    gpu::device_ptr<float[]> deviceEntries(gpu::make_device<float>(mat.entries, nnz));
-    gpu::device_ptr<int[]> deviceCols(gpu::make_device<int>(mat.cols, nnz));
-    gpu::device_ptr<int[]> deviceRowPtrs(gpu::make_device<int>(mat.rowPtrs, dim + 1));
-
-    gpu::device_ptr<float[]> deviceVec(gpu::make_device<float>(vec.entries, dim));
-    
-    gpu::device_ptr<float[]> deviceResult(gpu::make_device<float>(dim)); 
-
-    std::cout << "dim = " << dim << "\n";
-    std::cout << "NNZ = " << mat.nonZeroEntries() << "\n";
-    
-
-    kernel::sparseMatrixVectorProduct<<<dim / 1024,1024>>>(deviceEntries.get(),
-							   deviceCols.get(),
-							   deviceRowPtrs.get(),
-							   deviceVec.get(),
-							   dim,
-							   deviceResult.get());
-    checkCuda(cudaPeekAtLastError());
+    DenseVector<float, gpu::CudaDeleter<float[]>> prod = mat * vec;
     
     float result[dim];
-    gpu::memcpy_to_host(result, deviceResult.get(), dim);
+    gpu::memcpy_to_host(result, prod.entries().get(), dim);
     
     std::cout << "Done, now checking\n";
     if (result[0] != 5) {
@@ -49,7 +31,38 @@ int main () {
     if (result[dim - 1] != 3) {
 	std::cout << "result[last] is not 3: " << result[dim - 1] << "\n";
     }
-    std::cout << "Dont checking\n";
+    
+    std::cout << "Done checking\n\n\n Larger Example:\n";
+
+    const int bandSize = 2000;
+    std::vector<float> band(bandSize, 1);
+    mat = SparseMatrix<float, gpu::CudaDeleter<float[]>,gpu::CudaDeleter<int[]>>::bandMatrix(dim, band);
+    
+    prod = mat * vec;
+    
+    gpu::memcpy_to_host(result, prod.entries().get(), dim);
+
+    std::cout << "Done, now checking\n";
+    for (int i = 0; i < bandSize - 1; i++) {
+	float target = bandSize + i;
+	if (result[i] != target) {
+	    std::cout << "result[" << i << "] is not " << target << ": "<< result[i] << "\n";
+	}
+    }
+    for (int i = bandSize - 1; i < dim - bandSize + 1; i++) {;
+	if (result[i] != bandSize*2 - 1) {
+	    std::cout << "result[" << i << "] is not " << 39 << ": "<< result[i] << "\n";
+	}
+    }
+    for (int i = dim - bandSize + 1; i < dim; i++) {
+	float target = bandSize - 1 - i + dim;
+	if (result[i] != target) {
+	    std::cout << "result[" << i << "] is not " << target << ": "<< result[i] << "\n";
+	}
+    }
+   
+    
     return 0;
+    
     
 }

@@ -2,6 +2,7 @@
 #define GPU_MEMORY_CUH
 
 #include "Error.cuh"
+#include "allocater.hpp"
 #include <memory>
 #include <utility>
 #include <algorithm>
@@ -216,7 +217,7 @@ namespace gpu {
 
     template <class T, class HostDeleter = std::default_delete<T[]>>
     std::unique_ptr<T[], HostDeleter> get_from_device(const device_ptr<T[]>& device, int count) {
-	T* host = new T[count];
+	T* host = Allocater<T, HostDeleter>::allocate(count);;
 	memcpy_to_host(host, device.get(), count);
 	return std::unique_ptr<T[], HostDeleter>(host, HostDeleter());
     }

@@ -4,8 +4,8 @@
 
 int main() {
     int dim = 8;
-    DenseVector<double> v = DenseVectorFactory::constant<double>(dim, 1);
-    DenseVector<double> d = DenseVectorFactory::zero<double>(dim);
+    DenseVector<double> v = DenseVector<double>::constant(dim, 1);
+    DenseVector<double> d = DenseVector<double>::zero(dim);
     d[dim - 1] = 1;
     
     std::cout << "v " << v.toString() << "\n";
@@ -26,8 +26,8 @@ int main() {
     std::cout << "v " << v.toString() << "\n";
     std::cout << "d " << d.toString() << "\n";
 
-    SparseMatrix<double> A = SparseMatrixFactory::triDiagonal<double>(dim, -1, 2, -1);
-    DenseVector<double> x = DenseVectorFactory::zero<double>(dim);
+    SparseMatrix<double> A = SparseMatrix<double>::triDiagonal(dim, -1, 2, -1);
+    DenseVector<double> x = DenseVector<double>::zero(dim);
     DenseVector<double> ax = A * x;
     
     std::cout << "x " << x.toString() << "\n";

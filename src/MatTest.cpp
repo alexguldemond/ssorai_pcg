@@ -3,7 +3,7 @@
 
 int main() {
     std::vector<float> vec{100,1,1,1,1,1,5,1,1};
-    SparseMatrix<float> mat = SparseMatrixFactory::bandMatrix<float>(32, vec);
+    SparseMatrix<float> mat = SparseMatrix<float>::bandMatrix(32, vec);
     std::cout << mat.toString() << "\n";
 
     auto diag = mat.getAllDiagonals();

@@ -5,40 +5,54 @@
 
 #include <iostream>
 #include <cstdlib>
+#include "boost/program_options.hpp"
+
+using namespace boost::program_options;
 
 int main(int argc, char** argv) {
-    int dim = 1024;
-    if (argc > 1) {
-	dim = atoi(argv[1]);
-    }
-    double relax = 1;
-    if (argc > 2) {
-	relax = atof(argv[2]);
-    }
-    int threadsPerBlock = 1024;
-    if (argc > 3) {
-	threadsPerBlock = atoi(argv[3]);
-    }
+    try {
+	options_description desc{"Options"};
+	desc.add_options()
+	    ("help,h", "Help screen")
+	    ("dim,d", value<int>()->default_value(1024), "dimension")
+	    ("relax,r", value<float>()->default_value(1), "relaxation")
+	    ("threshold,t", value<float>()->default_value(.1), "termination threshold")
+	    ("threadsPerBlock, p", value<int>()->default_value(1024), "Threads Per Block");
+	
+	variables_map vm;
+	store(parse_command_line(argc, argv, desc), vm);
+	notify(vm);
+	
+	if (vm.count("help")) {
+	    std::cout << desc << '\n';
+	    return 0;
+	}
+	
+	int dim = vm["dim"].as<int>();
+	float relax = vm["relax"].as<float>();
+	float threshold = vm["threshold"].as<float>();
+	int threadsPerBlock = vm["threadsPerBlock"].as<int>();
+	
+	std::cout << "Solving with dim = " << dim << ", relax = " << relax << ", threshold = " << threshold << "\n";
 
-    std::cout << "Solving with dim = " << dim << ", relax = " << relax << "\n";
-
-    auto A = SparseMatrixFactory::triDiagonal<float, gpu::CudaHostDeleter<float[]>, gpu::CudaHostDeleter<int[]>>(dim, -1, 2, -1,
-														 gpu::CudaHostDeleter<float[]>(),
-														 gpu::CudaHostDeleter<int[]>(),
-														 gpu::safe_host_malloc<float>,
-														 gpu::safe_host_malloc<int>);
-    
-    auto b = DenseVectorFactory::constant<float, gpu::CudaHostDeleter<float[]>>(dim, 1,
-										gpu::CudaHostDeleter<float[]>(),
-										gpu::safe_host_malloc<float>);
-										
-    
-    GpuSolver<float, gpu::CudaHostDeleter<float[]>, gpu::CudaHostDeleter<int[]>> solver(A, b, 50000, relax, dim, threadsPerBlock);
-    auto result = solver.solve();
-
-    std::cout << "Iterations: " << result.iterations << "\n";
-    std::cout << "Final residual: " << result.residualNormSquared << "\n";
-    std::cout << "Ssora compute time: " << result.ssoraDuration << "\n";
-    std::cout << "Pcg comput time: " << result.pcgDuration << "\n";
-
+	std::vector<float> band(100, 1);
+	for (std::size_t i = 0; i < band.size(); i++) {
+	    band[i] = i;
+	}
+	band[0] = 100 * 101;
+	auto A = SparseMatrix<float, gpu::CudaHostDeleter<float[]>, gpu::CudaHostDeleter<int[]>>::bandMatrix(dim, band);
+	
+	auto b = DenseVector<float, gpu::CudaHostDeleter<float[]>>::constant(dim, 1);
+	
+	
+	GpuSolver<float, gpu::CudaHostDeleter<float[]>, gpu::CudaHostDeleter<int[]>> solver(A, b, threshold, relax, dim, threadsPerBlock);
+	auto result = solver.solve();
+	
+	std::cout << "\nIterations: " << result.iterations << "\n";
+	std::cout << "Final residual: " << result.residualNormSquared << "\n";
+	std::cout << "Ssora compute time: " << result.ssoraDuration << "\n";
+	std::cout << "Pcg comput time: " << result.pcgDuration << "\n";
+    } catch (const error &ex) {
+	std::cerr << ex.what() << '\n';
+    }    
 }

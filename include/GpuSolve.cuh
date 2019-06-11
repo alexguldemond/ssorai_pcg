@@ -12,10 +12,6 @@
 #include <algorithm>
 
 
-#define div_up(a, b) ((a/b) + ((a % b) == 0))
-
-template <class T>
-using DeviceVector = DenseVector<T, gpu::CudaDeleter<T[]> >;
 
 template <class T, class Deleter = std::default_delete<T[]>, class IntDeleter = std::default_delete<int[]> >
 class GpuSolver: LinearSolver<T, Deleter> {
@@ -71,8 +67,11 @@ void GpuSolver<T, Deleter, IntDeleter>::matVec(const gpu::device_ptr<T[]>& a_ent
 					       const gpu::device_ptr<int[]>& a_rowPtrs,
 					       const DeviceVector<T>& x,
 					       DeviceVector<T>& result) const {
-    kernel::sparseMatrixVectorProduct<<<div_up(dim(),threadsPerBlock),threadsPerBlock>>>(a_entries.get(), a_cols.get(), a_rowPtrs.get(),
-											x.entries.get(), dim(), result.entries.get());
+    constexpr int warpSize = 32;
+    const int blocks = kernel::roundUpDiv(dim(),threadsPerBlock);
+    const int sharedMemorySize = (threadsPerBlock + warpSize/2)*sizeof(float) + warpSize * 2 * sizeof(int);
+    kernel::sparseMatrixVectorProduct<T, warpSize><<<blocks, threadsPerBlock, sharedMemorySize >>>(a_entries.get(), a_cols.get(), a_rowPtrs.get(),
+												   x.entries().get(), dim(), result.entries().get());
     checkCuda(cudaPeekAtLastError());
 }
 
@@ -82,11 +81,11 @@ void GpuSolver<T, Deleter, IntDeleter>::aXPlusY(T scalar,
 						const DeviceVector<T>& y,
 						DeviceVector<T>& result) const {
     
-    kernel::aXPlusY<<< div_up(dim(),threadsPerBlock), threadsPerBlock>>>(scalar,
-									 x.entries.get(),
-									 y.entries.get(),
+    kernel::aXPlusY<<< kernel::roundUpDiv(dim(),threadsPerBlock), threadsPerBlock>>>(scalar,
+									 x.entries().get(),
+									 y.entries().get(),
 									 dim(),
-									 result.entries.get());
+									 result.entries().get());
     checkCuda(cudaPeekAtLastError());
 }
 
@@ -95,25 +94,25 @@ void GpuSolver<T, Deleter, IntDeleter>::dotProduct(const DeviceVector<T>& vec1,
 						   const DeviceVector<T>& vec2,
 						   gpu::device_ptr<T>& result) const {
     checkCuda(cudaMemset(result.get(), 0, sizeof(T)));
-    int blocks = div_up(dim(),threadsPerBlock);
-    kernel::dotProduct<<<blocks, threadsPerBlock, threadsPerBlock*sizeof(T)>>>(vec1.entries.get(), vec2.entries.get(), dim(), result.get());
+    int blocks = kernel::roundUpDiv(dim(),threadsPerBlock);
+    kernel::dotProduct<<<blocks, threadsPerBlock, threadsPerBlock*sizeof(T)>>>(vec1.entries().get(), vec2.entries().get(), dim(), result.get());
     checkCuda(cudaPeekAtLastError());
 }
 
 template <class T, class Deleter, class IntDeleter>
 void GpuSolver<T, Deleter, IntDeleter>::copyVector(const DeviceVector<T>& src, DeviceVector<T>& dest) const {
-    kernel::copyArray<<< div_up(dim(),threadsPerBlock), threadsPerBlock>>>(src.entries.get(), dest.entries.get(), dim());
+    kernel::copyArray<<< kernel::roundUpDiv(dim(),threadsPerBlock), threadsPerBlock>>>(src.entries().get(), dest.entries().get(), dim());
     checkCuda(cudaPeekAtLastError());
 }
 
 template <class T, class Deleter, class IntDeleter>
 Result<T> GpuSolver<T, Deleter, IntDeleter>::solve() const {
     std::cout << "Solving...\n";
-    DenseVector<T> x = DenseVectorFactory::zero<T>(dim());
+    DenseVector<T, Deleter> x = DenseVector<T, Deleter>::zero(dim());
 
     std::cout << "Computing ssora inverse...\n";
     boost::posix_time::ptime time_start(boost::posix_time::microsec_clock::local_time());
-    auto p_entries = mat.ssoraInverseEntries(relaxation);
+    std::unique_ptr<T[], Deleter>  p_entries = mat.ssoraInverseEntries(relaxation);
     boost::posix_time::ptime time_end(boost::posix_time::microsec_clock::local_time());
     boost::posix_time::time_duration ssoraDuration(time_end - time_start);
 
@@ -121,16 +120,16 @@ Result<T> GpuSolver<T, Deleter, IntDeleter>::solve() const {
     //Setup all device data
     std::cout << "Setting up device data...\n";
 
-    DeviceVector<T> device_x(dim(), gpu::make_device<T>(x.entries, dim()));
+    DeviceVector<T> device_x(dim(), gpu::make_device<T>(x.entries(), dim()));
     
-    auto device_a_entries = gpu::make_device<T, Deleter>(mat.entries, nnz());
-    auto device_a_cols = gpu::make_device<int, IntDeleter>(mat.cols, nnz());
-    auto device_a_rowPtrs = gpu::make_device<int, IntDeleter>(mat.rowPtrs, dim() + 1);
+    auto device_a_entries = gpu::make_device<T, Deleter>(mat.entries(), nnz());
+    auto device_a_cols = gpu::make_device<int, IntDeleter>(mat.cols(), nnz());
+    auto device_a_rowPtrs = gpu::make_device<int, IntDeleter>(mat.rowPtrs(), dim() + 1);
 
     auto device_p_entries = gpu::make_device<T, Deleter>(p_entries, nnz());
     
     //r = b - a.x = b
-    DeviceVector<T> device_r(dim(), gpu::make_device<T, Deleter>(vec.entries, dim()));
+    DeviceVector<T> device_r(dim(), gpu::make_device<T, Deleter>(vec.entries(), dim()));
     DeviceVector<T> device_next_r(dim(), gpu::make_device<T>( dim() ));
 
     //z = p.r
@@ -206,10 +205,10 @@ Result<T> GpuSolver<T, Deleter, IntDeleter>::solve() const {
 	count++;
     }
     
-    DenseVector<T> result(dim(), gpu::get_from_device<T>(device_x.entries, dim()));
+    DenseVector<T> result(dim(), gpu::get_from_device<T>(device_x.entries(), dim()));
     time_end = boost::posix_time::microsec_clock::local_time();
     boost::posix_time::time_duration pcgDuration(time_end - time_start);
-    return Result<T>(result, count, r_dot_r, ssoraDuration , pcgDuration);
+    return Result<T>(std::move(result), count, r_dot_r, std::move(ssoraDuration) , std::move(pcgDuration));
     
     
 }
