@@ -259,6 +259,7 @@ using DeviceVector = DenseVector<T, gpu::CudaDeleter<T[]> >;
 
 namespace LinearAlgebra {
     int threadsPerBlock = 1024;
+    int blocks = 8;
 }
 
 template <class T>
@@ -325,7 +326,7 @@ public:
 template <class T>
 DenseVector<T, gpu::CudaDeleter<T[]>> DenseVector<T, gpu::CudaDeleter<T[]>>::incremental(int dim, T startValue) {
     T* entries = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(dim);
-    kernel::initIncrementalArray<<<kernel::roundUpDiv(dim, LinearAlgebra::threadsPerBlock), LinearAlgebra::threadsPerBlock>>>(entries, dim, startValue);
+    kernel::initIncrementalArray<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(entries, dim, startValue);
     checkCuda(cudaPeekAtLastError());
     return DenseVector<T, gpu::CudaDeleter<T[]>>(dim, gpu::device_ptr<T[]>(entries, gpu::CudaDeleter<T[]>()));
 }
@@ -333,7 +334,7 @@ DenseVector<T, gpu::CudaDeleter<T[]>> DenseVector<T, gpu::CudaDeleter<T[]>>::inc
 template <class T>
 DenseVector<T, gpu::CudaDeleter<T[]>> DenseVector<T, gpu::CudaDeleter<T[]>>::constant(int dim, T value) {
     T* entries = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(dim);
-    kernel::initConstArray<<<kernel::roundUpDiv(dim, LinearAlgebra::threadsPerBlock), LinearAlgebra::threadsPerBlock>>>(entries, dim, value);
+    kernel::initConstArray<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(entries, dim, value);
     checkCuda(cudaPeekAtLastError());
     return DenseVector<T, gpu::CudaDeleter<T[]>>(dim, gpu::device_ptr<T[]>(entries, gpu::CudaDeleter<T[]>()));
 }
@@ -349,7 +350,7 @@ DenseVector<T, gpu::CudaDeleter<T[]>> DenseVector<T, gpu::CudaDeleter<T[]>>::zer
 template <class T>
 DenseVector<T, gpu::CudaDeleter<T[]>>::DenseVector(const DenseVector<T, gpu::CudaDeleter<T[]>>& other): _dim(other._dim) {
     T* newEntries = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(_dim);
-    kernel::copyArray<<<kernel::roundUpDiv(_dim, LinearAlgebra::threadsPerBlock), LinearAlgebra::threadsPerBlock>>>(other._entries.get(), newEntries, _dim);
+    kernel::copyArray<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(other._entries.get(), newEntries, _dim);
     checkCuda(cudaPeekAtLastError());
     _entries = gpu::device_ptr<T[]>(newEntries, gpu::CudaDeleter<T[]>());
 }
@@ -370,7 +371,7 @@ DenseVector<T, gpu::CudaDeleter<T[]>>& DenseVector<T, gpu::CudaDeleter<T[]>>::op
 	if (_dim != other._dim) {
 	    throw "Cannot assign to vector of different dimension\n";
 	}
-	kernel::copyArray<<<kernel::roundUpDiv(_dim, LinearAlgebra::threadsPerBlock), LinearAlgebra::threadsPerBlock>>>(other._entries.get(), _entries.get(), _dim);
+	kernel::copyArray<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(other._entries.get(), _entries.get(), _dim);
 	checkCuda(cudaPeekAtLastError());
     }
     return *this;
@@ -393,8 +394,7 @@ inline int DenseVector<T, gpu::CudaDeleter<T[]>>::dim() const  {
 template <class T>
 void DenseVector<T, gpu::CudaDeleter<T[]>>::dot(const DenseVector<T, gpu::CudaDeleter<T[]>>& other, std::unique_ptr<T, gpu::CudaDeleter<T>>& result) const {
     checkCuda(cudaMemset(result.get(), 0, sizeof(T)));
-    int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
-    kernel::dotProduct<<<blocks,
+    kernel::dotProduct<<<LinearAlgebra::blocks,
 	LinearAlgebra::threadsPerBlock,
 	LinearAlgebra::threadsPerBlock*sizeof(T)>>>(_entries.get(), other.entries().get(), dim(), result.get());
     checkCuda(cudaPeekAtLastError());
@@ -416,8 +416,7 @@ std::string DenseVector<T, gpu::CudaDeleter<T[]>>::toString() const{
 
 template <class T>
 DenseVector<T, gpu::CudaDeleter<T[]>>& DenseVector<T, gpu::CudaDeleter<T[]>>::updateAx(const T& scalar, const DenseVector<T, gpu::CudaDeleter<T[]>>& other) {
-    int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
-    kernel::aXPlusY<<<blocks, LinearAlgebra::threadsPerBlock>>>(scalar, other.entries().get(), _entries.get(), dim(),_entries.get());
+    kernel::aXPlusY<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(scalar, other.entries().get(), _entries.get(), dim(),_entries.get());
     return *this;
 }
 
@@ -438,8 +437,7 @@ template <class T>
 void DenseVector<T, gpu::CudaDeleter<T[]>>::plusAx(const T& scalar,
 						   const DenseVector<T, gpu::CudaDeleter<T[]>>& other,
 						   DenseVector<T, gpu::CudaDeleter<T[]>>& result) const {
-    int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
-    kernel::aXPlusY<<<blocks, LinearAlgebra::threadsPerBlock>>>(scalar, other.entries().get(), _entries.get(), dim(), result.entries().get());
+    kernel::aXPlusY<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(scalar, other.entries().get(), _entries.get(), dim(), result.entries().get());
 };
 
 template <class T>

@@ -178,7 +178,7 @@ namespace kernel {
 				  const int* __restrict__ rowPtrs,
 				  const T* __restrict__ diagonals,
 				  int dim,
-				  int relax,
+				  T relax,
 				  T* __restrict__ result) {
 	const int globalId = blockDim.x * blockIdx.x + threadIdx.x;
 	const int stride = blockDim.x * gridDim.x;

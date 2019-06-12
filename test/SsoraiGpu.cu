@@ -4,20 +4,23 @@
 #include "gtest/gtest.h"
 
 TEST(SsoraInverse, gpu) {
-    int dim = 1024;
+    int dim = 16;
 
     auto mat = SparseMatrix<float>::triDiagonal(dim, -1, 2, -1);
 
-    auto ssorai = mat.ssoraInverse(1);
+    auto ssorai = mat.ssoraInverse(.1);
     
     auto mat_gpu = SparseMatrix<float, gpu::CudaDeleter<float[]>, gpu::CudaDeleter<int[]>>::triDiagonal(dim , -1, 2, -1);
 
-    auto ssorai_gpu = mat_gpu.ssoraInverse(1);
+    auto ssorai_gpu = mat_gpu.ssoraInverse(.1);
 
     auto entries = gpu::get_from_device<float>(ssorai_gpu.entries(), mat.nonZeroEntries());
     auto cols = gpu::get_from_device<int>(ssorai_gpu.cols(), mat.nonZeroEntries());
     auto rowPtrs = gpu::get_from_device<int>(ssorai_gpu.rowPtrs(), dim + 1);
 
+    std::cout << ssorai_gpu.toString() << "\n";
+    std::cout << ssorai.toString() << "\n";
+    
     for (int i = 0; i < mat.nonZeroEntries(); i++) {
 	ASSERT_EQ(entries[i], ssorai.entries()[i]);
     }

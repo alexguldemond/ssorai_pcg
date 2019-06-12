@@ -179,7 +179,7 @@ public:
 };
 
 template <class T, class Deleter, class IntDeleter>
-ProxySparseMatrix<T, Deleter, IntDeleter>  SparseMatrixBase<T, Deleter, IntDeleter>::ssoraInverse(double w) const {
+ProxySparseMatrix<T, Deleter, IntDeleter>  SparseMatrixBase<T, Deleter, IntDeleter>::ssoraInverse(T w) const {
     return ProxySparseMatrix<T, Deleter, IntDeleter>(ssoraInverseEntries(w), (*this));
 }
 
@@ -377,7 +377,7 @@ public:
 
 
 template <class T>
-ProxySparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>  SparseMatrixBase<T,gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::ssoraInverse(double w) const {
+ProxySparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>  SparseMatrixBase<T,gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::ssoraInverse(T w) const {
     return ProxySparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>(ssoraInverseEntries(w), (*this));
 }
 
@@ -392,7 +392,7 @@ SparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::SparseMatrix(in
     int nnz = 0;
     gpu::memcpy_to_host<int>(&nnz, dev);
 
-    int blocks = kernel::roundUpDiv(nnz, LinearAlgebra::threadsPerBlock);
+    int blocks = LinearAlgebra::blocks;
     
     T* entriesPtr = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(nnz);
     kernel::copyArray<<<blocks, LinearAlgebra::threadsPerBlock>>>(newEntries.get(), entriesPtr, nnz);
@@ -427,7 +427,7 @@ SparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::SparseMatrix(co
 
     int nnz = other.nonZeroEntries();
     
-    int blocks = kernel::roundUpDiv(nnz, LinearAlgebra::threadsPerBlock);
+    int blocks = LinearAlgebra::blocks;
     
     T* entriesPtr = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(nnz);
     kernel::copyArray<<<blocks, LinearAlgebra::threadsPerBlock>>>(other.entries().get(), entriesPtr, nnz);
@@ -460,7 +460,7 @@ SparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::operator=(const
 	SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::operator=(other);
 	int nnz = other.nonZeroEntries();
     
-	int blocks = kernel::roundUpDiv(nnz, LinearAlgebra::threadsPerBlock);
+	int blocks = LinearAlgebra::blocks;
     
 	T* entriesPtr = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(nnz);
 	kernel::copyArray<<<blocks, LinearAlgebra::threadsPerBlock>>>(other.entries().get(), entriesPtr, nnz);
@@ -501,7 +501,7 @@ SparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::triDiagonal(int
     int* cols = Allocater<int, gpu::CudaDeleter<int[]>>::allocate(nnz);
     int* rowPtrs = Allocater<int, gpu::CudaDeleter<int[]>>::allocate(dim + 1);
     
-    int blocks = kernel::roundUpDiv(dim, LinearAlgebra::threadsPerBlock);
+    int blocks = LinearAlgebra::blocks;
     kernel::triDiagonal<T><<< blocks, LinearAlgebra::threadsPerBlock >>>(dim , left, middle, right, entries, cols, rowPtrs);
     checkCuda(cudaPeekAtLastError());
     return SparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>(dim,

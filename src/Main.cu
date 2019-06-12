@@ -33,7 +33,9 @@ int main(int argc, char** argv) {
 	    ("relax,r", value<float>()->default_value(1), "relaxation")
 	    ("threshold,t", value<float>()->default_value(.1), "termination threshold")
 	    ("gpu,g", bool_switch(&gpuMode), "gpu mode")
-	    ("threadsPerBlock,p", value<int>()->default_value(1024), "Threads Per Block, only matters in gpu mode");
+	    ("threadsPerBlock,p", value<int>()->default_value(1024), "Threads Per Block, only matters in gpu mode")
+	    ("blocks,b", value<int>()->default_value(0), "Number of blocks, only matters in gpu mode. Default is dim / threadsPerBlock rounded up");
+	
 	
 	variables_map vm;
 	store(parse_command_line(argc, argv, desc), vm);
@@ -48,11 +50,15 @@ int main(int argc, char** argv) {
 	float relax = vm["relax"].as<float>();
 	float threshold = vm["threshold"].as<float>();
 	int threadsPerBlock = vm["threadsPerBlock"].as<int>();
+	int blocks = vm["blocks"].as<int>() == 0 ? kernel::roundUpDiv(dim, threadsPerBlock) : vm["blocks"].as<int>();
 	std::string mode = gpuMode ? "gpu" : "cpu";
 	
 	std::cout << "Solving with dim = " << dim << ", relax = " << relax << ", threshold = " << threshold << ", mode = " << mode <<"\n";
 	if (gpuMode) {
 	    LinearAlgebra::threadsPerBlock = threadsPerBlock;
+	    LinearAlgebra::blocks = blocks;
+	    std::cout << "Threads Per Block = " << LinearAlgebra::threadsPerBlock << "\n";
+	    std::cout << "Num Blocks = " << LinearAlgebra::blocks << "\n";
 	    run<float, gpu::CudaDeleter<float[]>, gpu::CudaDeleter<int[]>, gpu::CudaDeleter<float>>(dim, relax, threshold);
 	} else {
 	    run<float, std::default_delete<float[]>, std::default_delete<int[]>, std::default_delete<float>>(dim, relax, threshold);

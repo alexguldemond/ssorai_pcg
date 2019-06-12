@@ -39,9 +39,9 @@ public:
 
     std::unique_ptr<T[], Deleter> getAllDiagonals() const;
 
-    std::unique_ptr<T[], Deleter> ssoraInverseEntries(double w) const;
+    std::unique_ptr<T[], Deleter> ssoraInverseEntries(T w) const;
     
-    ProxySparseMatrix<T, Deleter, IntDeleter> ssoraInverse(double w) const;
+    ProxySparseMatrix<T, Deleter, IntDeleter> ssoraInverse(T w) const;
     
     std::string toString() const;
 
@@ -89,7 +89,7 @@ std::unique_ptr<T[], Deleter> SparseMatrixBase<T, Deleter, IntDeleter>::getAllDi
 }
 
 template <class T, class Deleter, class IntDeleter>
-std::unique_ptr<T[], Deleter> SparseMatrixBase<T, Deleter, IntDeleter>::ssoraInverseEntries(double w) const {
+std::unique_ptr<T[], Deleter> SparseMatrixBase<T, Deleter, IntDeleter>::ssoraInverseEntries(T w) const {
     double mult = w*(2 - w);
     int nnz = nonZeroEntries();
     T* newEntries = Allocater<T, Deleter>::allocate(nnz);
@@ -243,9 +243,9 @@ public:
 
     std::unique_ptr<T[], gpu::CudaDeleter<T[]>> getAllDiagonals() const;
 
-    std::unique_ptr<T[], gpu::CudaDeleter<T[]>> ssoraInverseEntries(double w) const;
+    std::unique_ptr<T[], gpu::CudaDeleter<T[]>> ssoraInverseEntries(T w) const;
     
-    ProxySparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>> ssoraInverse(double w) const;
+    ProxySparseMatrix<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>> ssoraInverse(T w) const;
     
     std::string toString() const;
 
@@ -257,31 +257,31 @@ public:
 template <class T>
 std::unique_ptr<T[], gpu::CudaDeleter<T[]>> SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::getAllDiagonals() const {
     T* newEntries = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(dim());
-    const int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
-    kernel::getAllDiagonals<<<blocks, LinearAlgebra::threadsPerBlock>>>(entries().get(),
+    kernel::getAllDiagonals<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(entries().get(),
 									cols().get(),
 									rowPtrs().get(),
 									dim(),
 									newEntries);
+    checkCuda(cudaPeekAtLastError());
     return std::unique_ptr<T[], gpu::CudaDeleter<T[]>>(newEntries, gpu::CudaDeleter<T[]>());
 }
 
 template <class T>
 std::unique_ptr<T[], gpu::CudaDeleter<T[]>>
-SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::ssoraInverseEntries(double w) const {
+SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::ssoraInverseEntries(T w) const {
     T* newEntries = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(nonZeroEntries());
-    const int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
     
-    auto diags = getAllDiagonals();
-
-    kernel::ssoraiEntries<<<blocks, LinearAlgebra::threadsPerBlock>>>(entries().get(),
+    auto diags = getAllDiagonals();    
+    kernel::ssoraiEntries<<<LinearAlgebra::blocks, LinearAlgebra::threadsPerBlock>>>(entries().get(),
 								      cols().get(),
 								      rowPtrs().get(),
 								      diags.get(),
 								      dim(),
 								      w,
 								      newEntries);
-    return std::unique_ptr<T[], gpu::CudaDeleter<T[]>>(newEntries, gpu::CudaDeleter<T[]>());
+    
+    checkCuda(cudaPeekAtLastError());
+    return std::unique_ptr<T[], gpu::CudaDeleter<T[]>>(newEntries, gpu::CudaDeleter<T[]>());    
 }
 
 template <class T>
@@ -289,14 +289,15 @@ void SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::matVec
 										 DenseVector<T, gpu::CudaDeleter<T[]>>& result) const {
 
     constexpr int warpSize = 32;
-    const int blocks = kernel::roundUpDiv(dim(),LinearAlgebra::threadsPerBlock);
     const int sharedMemorySize = (LinearAlgebra::threadsPerBlock + warpSize/2)*sizeof(float) + warpSize * 2 * sizeof(int);
-    kernel::sparseMatrixVectorProduct<T, warpSize><<<blocks, LinearAlgebra::threadsPerBlock, sharedMemorySize >>>(entries().get(),
-														  cols().get(),
-														  rowPtrs().get(),
-														  vec.entries().get(),
-														  dim(),
-														  result.entries().get());
+    kernel::sparseMatrixVectorProduct<T, warpSize><<<LinearAlgebra::blocks,
+	LinearAlgebra::threadsPerBlock,
+	sharedMemorySize >>>(entries().get(),
+			     cols().get(),
+			     rowPtrs().get(),
+			     vec.entries().get(),
+			     dim(),
+			     result.entries().get());
     checkCuda(cudaPeekAtLastError());
 }
 
