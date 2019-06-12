@@ -1,0 +1,171 @@
+Solving with dim = 65536, relax = 0.1, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 29628
+Result Residual: 985.109
+Ssora compute time: 00:00:00.000488
+Pcg comput time: 00:00:18.707489
+
+Solving with dim = 65536, relax = 0.2, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 26793
+Result Residual: 941.446
+Ssora compute time: 00:00:00.000447
+Pcg comput time: 00:00:16.748763
+
+Solving with dim = 65536, relax = 0.3, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 24204
+Result Residual: 968.13
+Ssora compute time: 00:00:00.000445
+Pcg comput time: 00:00:15.172874
+
+Solving with dim = 65536, relax = 0.4, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 21966
+Result Residual: 993.149
+Ssora compute time: 00:00:00.000446
+Pcg comput time: 00:00:13.731844
+
+Solving with dim = 65536, relax = 0.5, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 20466
+Result Residual: 922.198
+Ssora compute time: 00:00:00.000445
+Pcg comput time: 00:00:12.796363
+
+Solving with dim = 65536, relax = 0.6, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 19429
+Result Residual: 981.2
+Ssora compute time: 00:00:00.000454
+Pcg comput time: 00:00:12.156407
+
+Solving with dim = 65536, relax = 0.7, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 18680
+Result Residual: 928.663
+Ssora compute time: 00:00:00.000453
+Pcg comput time: 00:00:11.677868
+
+Solving with dim = 65536, relax = 0.8, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 18120
+Result Residual: 988.809
+Ssora compute time: 00:00:00.000446
+Pcg comput time: 00:00:11.409314
+
+Solving with dim = 65536, relax = 0.9, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 17694
+Result Residual: 958.905
+Ssora compute time: 00:00:00.000437
+Pcg comput time: 00:00:11.063894
+
+Solving with dim = 65536, relax = 1, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 17365
+Result Residual: 930.612
+Ssora compute time: 00:00:00.000442
+Pcg comput time: 00:00:10.891672
+
+Solving with dim = 65536, relax = 1.1, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 17109
+Result Residual: 898.154
+Ssora compute time: 00:00:00.000449
+Pcg comput time: 00:00:10.709181
+
+Solving with dim = 65536, relax = 1.2, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16909
+Result Residual: 910.462
+Ssora compute time: 00:00:00.000447
+Pcg comput time: 00:00:10.591294
+
+Solving with dim = 65536, relax = 1.3, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16753
+Result Residual: 974.412
+Ssora compute time: 00:00:00.000439
+Pcg comput time: 00:00:10.457641
+
+Solving with dim = 65536, relax = 1.4, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16633
+Result Residual: 945.024
+Ssora compute time: 00:00:00.000448
+Pcg comput time: 00:00:10.427103
+
+Solving with dim = 65536, relax = 1.5, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16542
+Result Residual: 911.194
+Ssora compute time: 00:00:00.000457
+Pcg comput time: 00:00:10.336608
+
+Solving with dim = 65536, relax = 1.6, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16474
+Result Residual: 956.666
+Ssora compute time: 00:00:00.000446
+Pcg comput time: 00:00:10.332781
+
+Solving with dim = 65536, relax = 1.7, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16426
+Result Residual: 982.74
+Ssora compute time: 00:00:00.000451
+Pcg comput time: 00:00:10.307027
+
+Solving with dim = 65536, relax = 1.8, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16395
+Result Residual: 952.151
+Ssora compute time: 00:00:00.000446
+Pcg comput time: 00:00:10.282089
+
+Solving with dim = 65536, relax = 1.9, threshold = 1000, mode = gpu
+Solving...
+Computing ssora inverse...
+
+Iterations: 16378
+Result Residual: 904.572
+Ssora compute time: 00:00:00.000476
+Pcg comput time: 00:00:10.250207
+

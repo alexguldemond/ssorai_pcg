@@ -1,0 +1,1 @@
+for i in $(seq .1 .1 1.9); do ./pcg -d $((1024*128)) -g -t 50000 -r $i | grep -v "r.r"; echo ""; done | tee output.128
