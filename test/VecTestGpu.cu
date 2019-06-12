@@ -1,7 +1,7 @@
 #include "DenseVector.hpp"
-#include <iostream>
+#include "gtest/gtest.h"
 
-int main() {
+TEST(Vector, gpu) {
     int dim = 1024;
     DeviceVector<float> vec1 = DeviceVector<float>::constant(dim , 1);
     DeviceVector<float> vec2 = DeviceVector<float>::zero(dim);
@@ -17,18 +17,15 @@ int main() {
     std::unique_ptr<float[]> entries4 = gpu::get_from_device<float>(vec4.entries(), dim);
 
     for (int i = 0; i < dim; i++) {
-	if (entries1[i] != 1) {
-	    std::cout << i << ": " << entries1[i] << " != 1\n";
-	}
-	if (entries2[i] != 0) {
-	    std::cout << i << ": " << entries2[i] << " != 0\n";
-	}
-	if (entries3[i] != -1) {
-	    std::cout << i << ": " << entries3[i] << " != -1\n";
-	}
-	if (entries4[i] != 2) {
-	    std::cout << i << ": " << entries4[i] << " != 2\n";
-	}
+	ASSERT_EQ(1, entries1[i]);
+	ASSERT_EQ(0, entries2[2]);
+	ASSERT_EQ(-1, entries3[3]);
+	ASSERT_EQ(2, entries4[4]);
     }
-    std::cout << "Done\n";
+}
+
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
