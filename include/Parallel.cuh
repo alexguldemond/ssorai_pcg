@@ -88,10 +88,10 @@ namespace kernel {
 	volatile T* sData = (T*) mem;
 	volatile int* ptrs = &mem[blockDim.x + warpDim/2];
 	
-	const int threadId   = blockDim.x * blockIdx.x + threadIdx.x;    // global thread index
-	const int threadLane = threadIdx.x & (warpDim - 1);              // thread index within the warp
-	const int warpId   = threadId   /  warpDim;                     // global warp index
-	const int warpLane = threadIdx.x /  warpDim;                     // warp index within the block
+	const int threadId   = blockDim.x * blockIdx.x + threadIdx.x;  // global thread index
+	const int threadLane = threadIdx.x & (warpDim - 1);            // thread index within the warp, assumes warpDim is a multiple of 2 to perform fast modulo operation
+	const int warpId   = threadId  /  warpDim;                     // global warp index
+	const int warpLane = threadIdx.x /  warpDim;                   // warp index within the block
 	const int warpsPerBlock = blockDim.x / warpDim;
 	const int numWarps = warpsPerBlock * gridDim.x;                // total number of active vect
 
@@ -112,7 +112,7 @@ namespace kernel {
 		    sum += matEntries[j] * vec[matCols[j]];
 		}
 
-		for (j += warpDim; j < rowEnd; j += warpDim) {
+		for (j = j + warpDim; j < rowEnd; j += warpDim) {
 		    sum += matEntries[j] * vec[matCols[j]];
 		}
 	    } else {
@@ -124,11 +124,21 @@ namespace kernel {
 	    sData[threadIdx.x] = sum;
 
 	    // reduce local sums to row sum
-	    if (warpDim > 16) sData[threadIdx.x] = sum = sum + sData[threadIdx.x + 16];
-	    if (warpDim >  8) sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  8];
-	    if (warpDim >  4) sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  4];
-	    if (warpDim >  2) sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  2];
-	    if (warpDim >  1) sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  1];
+	    if (warpDim > 16) {
+		sData[threadIdx.x] = sum = sum + sData[threadIdx.x + 16];
+	    }
+	    if (warpDim >  8) {
+		sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  8];
+	    }
+	    if (warpDim >  4) {
+		sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  4];
+	    }
+	    if (warpDim >  2) {
+		sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  2];
+	    }
+	    if (warpDim >  1) {
+		sData[threadIdx.x] = sum = sum + sData[threadIdx.x +  1];
+	    }
 
 	    if (threadLane == 0) {
 		result[row] = sData[threadIdx.x];
