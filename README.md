@@ -6,4 +6,7 @@ To build, run the following:
 ```mkdir -p build bin
 cd build
 cmake .. -DCMAKE_CXX_COMPILER=<your comiler>
-make```
+make
+```
+
+To run tests, run `ctest` in the build directory.
