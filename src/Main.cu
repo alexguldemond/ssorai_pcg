@@ -20,7 +20,7 @@ void run(int dim, T relax, T threshold) {
     std::cout << "\nIterations: " << result.iterations << "\n";
     std::cout << "Result Residual: " << result.residualNormSquared << "\n";
     std::cout << "Ssora compute time: " << result.ssoraDuration << "\n";
-    std::cout << "Pcg comput time: " << result.pcgDuration << "\n";
+    std::cout << "Pcg compute time: " << result.pcgDuration << "\n";
 }
 
 int main(int argc, char** argv) {
