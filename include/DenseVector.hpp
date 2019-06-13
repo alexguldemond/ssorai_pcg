@@ -11,6 +11,9 @@
 #include "allocater.hpp"
 
 //Declare lazy operators
+template<class T, class Deleter>
+class Op;
+
 template <class T, class Deleter>
 class PlusAx;
 
@@ -66,19 +69,14 @@ public:
 
     DenseVector<T, Deleter>& updateAx(const T& scalar, const DenseVector<T, Deleter>& other);
 
-    DenseVector(const PlusAx<T, Deleter>& op);
+    DenseVector(const Op<T, Deleter>& op);
     
-    DenseVector<T, Deleter>& operator=(const PlusAx<T, Deleter>&& op);
+    DenseVector<T, Deleter>& operator=(const Op<T, Deleter>&& op);
 
     void plusAx(const T& scalar, const DenseVector<T, Deleter>& other, DenseVector<T, Deleter>& result) const;
     
     PlusAx<T, Deleter> plusAx(const T& scalar, const DenseVector<T, Deleter>& other) const;
 
-    template <class IntDeleter>
-    DenseVector(const MatVec<T, Deleter, IntDeleter>& op);
-
-    template <class IntDeleter>
-    DenseVector<T, Deleter>& operator=(const MatVec<T, Deleter, IntDeleter>& op);
 };
 
 template <class T, class Deleter>
@@ -203,9 +201,17 @@ DenseVector<T, Deleter>& DenseVector<T, Deleter>::updateAx(const T& scalar, cons
     return *this;
 }
 
-//PlusAx laziness
+//Laziness
+template<class T, class Deleter>
+class Op {
+public:
+    virtual int dim() const = 0; 
+    
+    virtual void operator()(DenseVector<T, Deleter>& result) const = 0;
+};
+
 template <class T, class Deleter>
-class PlusAx {
+class PlusAx: public Op<T, Deleter> {
 private:
     const DenseVector<T, Deleter>& vector1;
     const T& scalar;
@@ -224,14 +230,14 @@ public:
 };
 
 template <class T, class Deleter>
-DenseVector<T, Deleter>::DenseVector(const PlusAx<T, Deleter>& op): _dim(op.dim()) {
+DenseVector<T, Deleter>::DenseVector(const Op<T, Deleter>& op): _dim(op.dim()) {
     T* entr = Allocater<T, Deleter>::allocate(op.dim());
     _entries = std::unique_ptr<T[], Deleter>(entr, Deleter());
     op(*this);
 }
 
 template <class T, class Deleter>
-DenseVector<T, Deleter>& DenseVector<T, Deleter>::operator=(const PlusAx<T, Deleter>&& op) {
+DenseVector<T, Deleter>& DenseVector<T, Deleter>::operator=(const Op<T, Deleter>&& op) {
     op(*this);
     return *this;
 }
@@ -310,17 +316,13 @@ public:
 
     DenseVector<T, gpu::CudaDeleter<T[]>>& updateAx(const T& scalar, const DenseVector<T, gpu::CudaDeleter<T[]>>& other);
 
-    DenseVector(const PlusAx<T, gpu::CudaDeleter<T[]>>& op);
+    DenseVector(const Op<T, gpu::CudaDeleter<T[]>>& op);
     
-    DenseVector<T, gpu::CudaDeleter<T[]>>& operator=(const PlusAx<T, gpu::CudaDeleter<T[]>>&& op);
+    DenseVector<T, gpu::CudaDeleter<T[]>>& operator=(const Op<T, gpu::CudaDeleter<T[]>>& op);
 
     void plusAx(const T& scalar, const DenseVector<T, gpu::CudaDeleter<T[]>>& other, DenseVector<T, gpu::CudaDeleter<T[]>>& result) const;
     
     PlusAx<T, gpu::CudaDeleter<T[]>> plusAx(const T& scalar, const DenseVector<T, gpu::CudaDeleter<T[]>>& other) const;
-
-    DenseVector(const MatVec<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>& op);
-
-    DenseVector<T, gpu::CudaDeleter<T[]>>& operator=(const MatVec<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>& op);
 };
 
 template <class T>
@@ -421,14 +423,14 @@ DenseVector<T, gpu::CudaDeleter<T[]>>& DenseVector<T, gpu::CudaDeleter<T[]>>::up
 }
 
 template <class T>
-DenseVector<T, gpu::CudaDeleter<T[]>>::DenseVector(const PlusAx<T, gpu::CudaDeleter<T[]>>& op): _dim(op.dim()) {
+DenseVector<T, gpu::CudaDeleter<T[]>>::DenseVector(const Op<T, gpu::CudaDeleter<T[]>>& op): _dim(op.dim()) {
     T* entr = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(_dim);
     _entries = std::unique_ptr<T[], gpu::CudaDeleter<T[]>>(entr, gpu::CudaDeleter<T[]>());
     op(*this);
 }
 
 template <class T>
-DenseVector<T, gpu::CudaDeleter<T[]>>& DenseVector<T, gpu::CudaDeleter<T[]>>::operator=(const PlusAx<T, gpu::CudaDeleter<T[]>>&& op) {
+DenseVector<T, gpu::CudaDeleter<T[]>>& DenseVector<T, gpu::CudaDeleter<T[]>>::operator=(const Op<T, gpu::CudaDeleter<T[]>>& op) {
     op(*this);
     return *this;
 }

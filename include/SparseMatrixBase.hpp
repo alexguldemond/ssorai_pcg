@@ -163,7 +163,7 @@ std::string SparseMatrixBase<T, Deleter, IntDeleter>::toString() const {
 }
 
 template <class T, class Deleter, class IntDeleter>
-class MatVec {
+class MatVec: public Op<T, Deleter>  {
 private:
     const SparseMatrixBase<T, Deleter, IntDeleter>& mat;
     const DenseVector<T, Deleter>& vec;
@@ -194,21 +194,6 @@ void SparseMatrixBase<T, Deleter, IntDeleter>::matVec(const DenseVector<T, Delet
 template <class T, class Deleter, class IntDeleter>
 MatVec<T, Deleter, IntDeleter> SparseMatrixBase<T, Deleter, IntDeleter>::operator*(const DenseVector<T, Deleter>& vec) const {
     return MatVec<T, Deleter, IntDeleter>(*this, vec);
-}
-
-template <class T, class Deleter>
-template <class IntDeleter>
-DenseVector<T, Deleter>::DenseVector(const MatVec<T, Deleter, IntDeleter>& op): _dim(op.dim()) {
-    T* entriesPtr = Allocater<T, Deleter>::allocate(op.dim());
-    _entries = std::unique_ptr<T[], Deleter>(entriesPtr, Deleter());
-    op(*this);
-}
-
-template <class T, class Deleter>
-template <class IntDeleter>
-DenseVector<T, Deleter>& DenseVector<T, Deleter>::operator=(const MatVec<T, Deleter, IntDeleter>& op) {
-    op(*this);
-    return *this;
 }
 
 //Specialize for device matrices
@@ -305,20 +290,6 @@ template <class T>
 MatVec<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>
 SparseMatrixBase<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>::operator*(const DenseVector<T, gpu::CudaDeleter<T[]>>& vec) const {
     return MatVec<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>(*this, vec);
-}
-
-template <class T>
-DenseVector<T, gpu::CudaDeleter<T[]>>::DenseVector(const MatVec<T, gpu::CudaDeleter<T[]>, gpu::CudaDeleter<int[]>>& op): _dim(op.dim()) {
-    T* entriesPtr = Allocater<T, gpu::CudaDeleter<T[]>>::allocate(op.dim());
-    _entries = std::unique_ptr<T[], gpu::CudaDeleter<T[]>>(entriesPtr, gpu::CudaDeleter<T[]>());
-    op(*this);
-}
-
-template <class T>
-DenseVector<T,  gpu::CudaDeleter<T[]>>&
-DenseVector<T,  gpu::CudaDeleter<T[]>>::operator=(const MatVec<T,  gpu::CudaDeleter<T[]>,  gpu::CudaDeleter<int[]>>& op) {
-    op(*this);
-    return *this;
 }
 
 #endif
